@@ -1,0 +1,65 @@
+.pagination {
+  cursor: pointer;
+  width: 3rem;
+  align-self: center;
+  padding: 3px;
+  border-radius: 6rem;
+}
+.pagination.active {
+  color: #ffffff;
+  background-color: #005dab;
+  border-color: #005dab;
+  border-radius: 6rem;
+  align-items: center;
+}
+
+.button-icon {
+  height: 17px;
+  width: 17px;
+  margin-right: 10px;
+}
+.export-report {
+  background-color: #3796f3;
+  color: white;
+  font-weight: 300;
+  font-size: 14px;
+}
+.export-report:hover {
+  background-color: #0e80f1;
+}
+
+.addPromo_Button {
+  background-color: #005dab;
+  color: #ffffff;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+.custom-date-picker {
+  display: block;
+  width: 100%;
+  padding: 0.375rem 0.75rem;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #212529;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  appearance: none;
+  border-radius: 0.25rem;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+.custom-date-picker:focus-visible {
+  outline: none;
+}
+.clearButton {
+  background-color: #005dab;
+  color: white;
+  font-size: 14px;
+}
+.disabledButton {
+  background-color: #005dab90;
+  color: white;
+  font-size: 14px;
+}

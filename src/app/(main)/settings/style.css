@@ -1,0 +1,23 @@
+.submitButtonStyle {
+  background-color: green;
+  color: white;
+  border-radius: 5px;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  font-size: 14px;
+  height: 26px;
+}
+.closeButtonStyle {
+  background-color: red;
+  color: white;
+  border-radius: 5px;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  margin-left: 0.75rem;
+  font-size: 14px;
+  height: 26px;
+}
+.titleStyle{
+    font-size: 14px; 
+    font-family:sans-serif;
+}

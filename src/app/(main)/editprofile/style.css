@@ -1,0 +1,22 @@
+.updateButton {
+  background-color: gray;
+  color: white;
+  font-size: 14px;
+}
+.closeButton {
+  background-color: blueviolet;
+  color: white;
+  font-size: 14px;
+}
+.labelStyle {
+  font-size: 14px;
+  font-weight: bold;
+}
+.uploadButton {
+    background-color: #005dab;
+    color: white;
+    font-size: 14px;
+  }
+  .emailText{
+    color: #00000080;
+  }

@@ -1,33 +1,223 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+  width: 100%;
+  height: 100%;
 }
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+* {
+  margin: 0;
+}
+.login-main {
+  display: grid;
+  align-items: center;
+  background-image: linear-gradient(
+    to bottom,
+    black 0%,
+    #000033 50%,
+    #343475 100%
+  );
+  background-color: #000033;
+}
+.card {
+  background-color: white;
+  border-radius: 10px;
+}
+.login-margin {
+  margin-left: 10%;
+  margin-right: 10%;
+}
+.input-field {
+  height: 40px;
+  background-color: #00000010;
+}
+.logo {
+  width: 15rem;
+}
+.login-btn {
+  background-color: #005dab;
+  color: #ffffff;
+}
+.forgot-password {
+  color: #005dab90;
+}
+.forgot-password:hover {
+  text-decoration-line: underline;
+  cursor: pointer;
+}
+.word {
+  text-transform: uppercase;
+  text-align: center;
+  color: transparent;
+  background-image: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.8) 1%,
+    transparent 30%
+  );
+  background-size: 300% 100%;
+  background-repeat: no-repeat;
+  background-position: 100%;
+  background-clip: text;
+  animation: 1.3s 1 linear cover, 6s infinite ease-in text-loader;
+}
+.glovers {
+  animation-delay: 0s, 1.5s;
+}
+.scorebook {
+  animation-delay: 0s, 3s;
+}
+@keyframes cover {
+  from {
+    color: white;
+  }
+  to {
+    color: transparent;
   }
 }
+@keyframes text-loader {
+  from {
+    background-position: 100%;
+  }
+  to {
+    background-position: -100%;
+  }
+}
+#sidebar {
+  --tw-translate-x: -100%;
+}
+#menu-close-icon {
+  display: none;
+}
 
-body {
-  color: rgb(var(--foreground-rgb));
+#menu-open:checked ~ #sidebar {
+  --tw-translate-x: 0;
+}
+#menu-open:checked ~ * #mobile-menu-button {
+  background-color: rgba(31, 41, 55, var(--tw-bg-opacity));
+}
+#menu-open:checked ~ * #menu-open-icon {
+  display: none;
+}
+#menu-open:checked ~ * #menu-close-icon {
+  display: block;
+}
+
+@media (min-width: 900px) {
+  #sidebar {
+    --tw-translate-x: 0;
+  }
+}
+.dashboardIconSize {
+  height: 25px;
+  width: 25px;
+}
+.seasonIconSize {
+  height: 18px;
+  width: 18px;
+}
+.dashboard:hover {
+  background-color: #ffffff20;
+  text-decoration-line: underline;
+  cursor: pointer;
+}
+
+.activeTab {
+  background-color: #ffffff20;
+}
+.inActiveTab {
+  background-color: none;
+}
+.light-grey {
+  background-color: #f8f9fa;
+}
+
+.menu {
+  filter: drop-shadow(1px 1px 1px #5116a9);
+  width: 300px;
+}
+.dashboardBox1 {
   background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+    to right bottom,
+    rgb(14, 209, 166),
+    rgb(44, 116, 0)
+  );
+  border-radius: 10px;
+}
+.dashboardBox2 {
+  background: linear-gradient(
+    to right bottom,
+    rgb(242, 129, 175),
+    rgb(167, 46, 110)
+  );
+  border-radius: 10px;
+}
+.dashboardBox3 {
+  background: linear-gradient(
+    to right bottom,
+    rgb(255, 184, 96),
+    rgb(197, 109, 0)
+  );
+  border-radius: 10px;
+}
+.dashboardBox4 {
+  background: linear-gradient(
+    to right bottom,
+    rgb(180, 129, 255),
+    rgb(92, 6, 218)
+  );
+  border-radius: 10px;
+}
+.dashboardBoxIconSize {
+  height: 40px;
+  width: 40px;
+  color: white;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+.tab {
+  cursor: pointer;
+  width: 6rem;
+  align-self: center;
+  padding: 3px;
+  border-radius: 6rem;
+}
+.tab.active {
+  color: #ffffff;
+  background-color: #005dab;
+  border-color: #005dab;
+  border-radius: 6rem;
+  align-items: center;
+  cursor: default;
+}
+.borderBottomColor {
+  border-bottom-color: #005dab;
+}
+.paginationIcon {
+  height: 22px;
+  width: 22px;
+  color: #005dab;
+}
+input:focus-visible {
+  outline: none;
+}
+.dropdown-active{
+ background-color: #005dab; 
+ color: white;
+}
+.custom-date-picker {
+  display: block;
+  width: 100%;
+  padding: 0.375rem 0.75rem;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #212529;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  appearance: none;
+  border-radius: 0.25rem;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+.custom-date-picker:focus-visible {
+  outline: none;
 }
