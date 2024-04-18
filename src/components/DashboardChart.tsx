@@ -1,7 +1,14 @@
 import React from "react";
 import ReactApexChart from "react-apexcharts";
 
-const DashboardChart = ({ colors, categories, title, data }) => {
+type props = {
+  colors: string[];
+  categories: string[];
+  title:string;
+  data: number[];
+};
+
+const DashboardChart = ({ colors, categories, title, data }: props) => {
   return (
     <div className="border mx-3 my-2">
       <h6 className="border-b py-4 ps-6">{title}</h6>

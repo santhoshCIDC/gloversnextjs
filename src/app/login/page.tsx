@@ -7,16 +7,23 @@ import React, { useEffect, useState } from "react";
 // component
 import { useLoginMutation } from "@/redux/services/AuthService";
 import Utility, { ToastMessage } from "@/utils/Utility";
+import ButtonLoading from "@/components/ButtonLoading";
+import { useDispatch } from "react-redux";
+import { userDetails } from "@/redux/slices/AuthSlice";
 
 const Login = () => {
+  const dispatch = useDispatch();
   const route = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [login, { data, isSuccess }] = useLoginMutation();
+  const [login, { data, isSuccess, isLoading }] = useLoginMutation();
 
   useEffect(() => {
     if (data?.code === 0) {
       route.push("/dashboard");
+      setEmail("");
+      setPassword("");
+      dispatch(userDetails(data?.data));
     } else {
       Utility.toastMessage(data?.message);
     }
@@ -62,7 +69,8 @@ const Login = () => {
               className="input-field rounded-md mx-10 ps-3"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-            ></input>
+              placeholder="Enter your email"
+            />
           </div>
           <div className="flex flex-col mt-6">
             <span className="ms-3">Password :</span>
@@ -70,7 +78,8 @@ const Login = () => {
               className="input-field rounded-md mx-10 ps-3"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-            ></input>
+              placeholder="Enter your password"
+            />
           </div>
           <span
             className="flex justify-end forgot-password mr-10 mt-3"
@@ -79,12 +88,12 @@ const Login = () => {
             Forgot Password?
           </span>
           <div className="flex mx-10">
-            <button
-              className="login-btn w-full rounded-md py-2 mt-3"
-              onClick={() => onClickSubmit()}
-            >
-              Login
-            </button>
+            <ButtonLoading
+              loading={isLoading}
+              onClickButton={() => onClickSubmit()}
+              loadingLabel="Please wait..."
+              buttonLabel="Login"
+            />
           </div>
           <div className="flex flex-row justify-center mt-6 gap-2">
             <span>Don&apos;t have an accout?</span>

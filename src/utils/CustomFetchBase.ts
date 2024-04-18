@@ -1,7 +1,8 @@
 import { Mutex } from "async-mutex";
 
 import { BaseQueryFn, fetchBaseQuery } from "@reduxjs/toolkit/query";
-import { RootState } from "@/redux/store";
+import { RootState } from "@/redux/Store";
+
 
 const baseUrl = process.env.NEXT_PUBLIC_URl;
 
@@ -10,13 +11,16 @@ const mutex = new Mutex();
 const baseQuery = fetchBaseQuery({
   baseUrl,
   prepareHeaders: (headers, { getState }) => {
-    const token: any | null = (getState() as RootState).authState.token;
+    const token: any | null = (getState() as RootState).authState?.tokenDetails?.access_token;
+  
+    console.log("getState--",token);
     if (token) {
-      const idToken =
-        typeof token === "string"
-          ? JSON.parse(token).idToken.jwtToken
-          : token.idToken.jwtToken;
-      headers.set("Authorization", idToken);
+      // const idToken =
+      //   typeof token === "string"
+      //     ? JSON.parse(token).idToken.jwtToken
+      //     : token.idToken.jwtToken;
+     
+      headers.set("Authorization", token);
     }
     return headers;
   },

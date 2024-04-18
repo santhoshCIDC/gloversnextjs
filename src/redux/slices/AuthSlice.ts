@@ -12,26 +12,35 @@ const isLocalStorageAvailable = () => {
 };
 
 const initialState = {
-  token:
-    isLocalStorageAvailable() && localStorage.getItem("token")
-      ? JSON.parse(localStorage.getItem("token") || "")
-      : null,
+  userDetails: localStorage?.getItem("userDetails")
+    ? JSON.parse(localStorage.getItem("userDetails") || "")
+    : null,
+
+  tokenDetails: localStorage.getItem("tokenDetails")
+    ? JSON.parse(localStorage.getItem("tokenDetails") || "")
+    : null,
 };
 
 export const authSlice = createSlice({
   initialState,
   name: "auth",
   reducers: {
-    authTokens: (state, action) => {
-      state.token = action.payload;
-      if (isLocalStorageAvailable()) {
-        localStorage.setItem("token", action.payload);
-      }
+    userDetails: (state, action) => {
+      // userDetails
+      state.userDetails = action.payload?.user;
+      localStorage.setItem("userDetails", JSON.stringify(action.payload.user));
+      
+      // tokenDetails
+      state.tokenDetails = action.payload?.token_details;
+      localStorage.setItem(
+        "tokenDetails",
+        JSON.stringify(action.payload.token_details)
+      );
     },
   },
 });
 
-export const { authTokens } = authSlice.actions;
+export const { userDetails } = authSlice.actions;
 export const currentUser = (state: any) => state.userState.user;
 
 export default authSlice.reducer;

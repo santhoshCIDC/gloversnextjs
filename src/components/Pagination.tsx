@@ -1,9 +1,7 @@
-// components/Pagination.js
-
 import React from "react";
 import { FaArrowCircleRight, FaArrowCircleLeft } from "react-icons/fa";
 
-const Pagination = ({ currentPage, totalPages, onPageChange }) => {
+const Pagination = ({ currentPage, totalPages, onPageChange }: any) => {
   const prevPage = () => {
     if (currentPage > 1) {
       onPageChange(currentPage - 1);
@@ -20,7 +18,6 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
     const pageNumbers = [];
 
     if (totalPages <= 5) {
-      // If total pages are less than or equal to 5, show all page numbers
       for (let i = 1; i <= totalPages; i++) {
         pageNumbers.push(
           <button
@@ -35,9 +32,8 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
         );
       }
     } else {
-      // If total pages are more than 5, show ellipsis and page numbers around current page
       if (currentPage <= 3) {
-        for (let i = 1; i <= 3; i++) {
+        for (let i = 1; i <= 4; i++) {
           pageNumbers.push(
             <button
               key={i}
@@ -61,7 +57,7 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
             ...
           </span>
         );
-        for (let i = totalPages - 2; i <= totalPages; i++) {
+        for (let i = totalPages - 3; i <= totalPages; i++) {
           pageNumbers.push(
             <button
               key={i}
@@ -80,7 +76,7 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
             ...
           </span>
         );
-        for (let i = currentPage - 1; i <= currentPage + 1; i++) {
+        for (let i = currentPage - 1; i <= currentPage + 2; i++) {
           pageNumbers.push(
             <button
               key={i}
@@ -110,7 +106,7 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
         onClick={prevPage}
         disabled={currentPage === 1}
         className={`px-2 mr-2 rounded-3xl light-grey ${
-          currentPage === 1 && "cursor-not-allowed"
+          currentPage === 1 ? "cursor-not-allowed" : ""
         }`}
       >
         <FaArrowCircleLeft className="paginationIcon" />
@@ -120,7 +116,7 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
         onClick={nextPage}
         disabled={currentPage === totalPages}
         className={`px-2 ml-2 rounded-3xl light-grey ${
-          currentPage === totalPages && "cursor-not-allowed"
+          currentPage === totalPages ? "cursor-not-allowed" : ""
         }`}
       >
         <FaArrowCircleRight className="paginationIcon" />
