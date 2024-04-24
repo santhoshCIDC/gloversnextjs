@@ -1,6 +1,7 @@
 "use client";
 import ButtonLoading from "@/components/ButtonLoading";
 import { useForgotPasswordMutation } from "@/redux/services/AuthService";
+import { IMAGES } from "@/utils/SharedImages";
 import Utility, { ToastMessage } from "@/utils/Utility";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -44,7 +45,7 @@ const ForgotPassword = () => {
         <div className="card lg:3/4 xl:w-3/4 w-full md:w-11/12 justify-center p-6">
           <Image
             className="logo flex m-auto"
-            src={require("../../../public/assets/logo.png")}
+            src={IMAGES.app_logo}
             alt=""
           />
           <h4 className="ms-3">Forgot Password</h4>

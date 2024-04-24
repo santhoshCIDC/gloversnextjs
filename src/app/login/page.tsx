@@ -10,6 +10,7 @@ import Utility, { ToastMessage } from "@/utils/Utility";
 import ButtonLoading from "@/components/ButtonLoading";
 import { useDispatch } from "react-redux";
 import { userDetails } from "@/redux/slices/AuthSlice";
+import { IMAGES } from "@/utils/SharedImages";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -60,7 +61,7 @@ const Login = () => {
         <div className="card lg:3/4 xl:w-3/4 w-full md:w-11/12 justify-center p-6">
           <Image
             className="logo flex m-auto"
-            src={require("../../../public/assets/logo.png")}
+            src={IMAGES.app_logo}
             alt=""
           />
           <div className="flex flex-col mt-6">

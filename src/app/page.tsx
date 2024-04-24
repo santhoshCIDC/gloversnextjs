@@ -2,6 +2,7 @@
 import Image from "next/image";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { IMAGES } from "@/utils/SharedImages";
 
 const Home = () => {
   const route = useRouter();
@@ -18,7 +19,7 @@ const Home = () => {
     <div className="splash-main">
       <Image
         className="logo"
-        src={require("../../public/assets/logo.png")}
+        src={IMAGES.app_logo}
         alt="Logo"
         width={500}
         height={500}

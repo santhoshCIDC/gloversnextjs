@@ -7,6 +7,7 @@ import Pagination from "@/components/Pagination";
 import { BsFileEarmarkText } from "react-icons/bs";
 import { useLazyTeamListQuery } from "@/redux/services/TeamListService";
 import Loading from "@/components/Loading";
+import { MESSAGE } from "@/utils/Constants";
 
 const TeamList = () => {
   const [teamList, { data: isTeamListData, isFetching: isTeamListFetching }] =
@@ -117,7 +118,7 @@ const TeamList = () => {
           </table>
           {!isTeamListFetching && isTeamListData?.data?.length === 0 && (
             <span className="flex justify-center items-center h-96 ">
-              Teams are not found
+              {MESSAGE.TEAMS_EMPTY_MESSAGE}
             </span>
           )}
 

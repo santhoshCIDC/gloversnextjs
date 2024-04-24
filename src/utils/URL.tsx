@@ -16,3 +16,9 @@ export const DASHBOARD_API = {
 export const TEAM_LIST_API = {
   TEAM_LIST: "/v1/user/admin/teams-list?",
 };
+
+export const SEASON_API = {
+  SEASON_LIST: "/v1/user/season",
+  SEASON_CREATE: "/v1/user/admin/season-create",
+  DELETE_SEASON: "/v1/user/inactive_season",
+};

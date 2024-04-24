@@ -102,7 +102,7 @@ export const Transaction = () => {
               })}
           </tbody>
         </table>
-        {displayedData?.length === 0 && (
+        {/* {displayedData?.length === 0 && (
           <div className="flex items-center justify-center pt-5">
             <span className="font-serif">
               {tabName === "live"
@@ -112,7 +112,7 @@ export const Transaction = () => {
                 : "No upcoming events found"}
             </span>
           </div>
-        )}
+        )} */}
         {liveData !== undefined && liveData.length > 10 && (
           <div className="grid grid-cols-2">
             <div />
