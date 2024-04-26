@@ -5,6 +5,9 @@ import React, { useEffect, useState } from "react";
 import "./style.css";
 import Pagination from "@/components/Pagination";
 import { BsFileEarmarkText } from "react-icons/bs";
+import { useLazyEventListQuery } from "@/redux/services/EventListService";
+import { MESSAGE } from "@/utils/Constants";
+import Loading from "@/components/Loading";
 
 const EventList = () => {
   const liveData = [
@@ -134,28 +137,40 @@ const EventList = () => {
       game_date: "10/28/2023",
     },
   ];
+  const [
+    eventList,
+    { data: isEventListData, isFetching: isEventListFetching },
+  ] = useLazyEventListQuery();
 
   const itemsPerPage = 10;
   const [currentPage, setCurrentPage] = useState(1);
   const [tabName, setTabName] = useState("live");
-  const [datas, setDatas] = useState(liveData);
+  const [datas, setDatas] = useState(isEventListData?.data?.live);
+  const [searchText, setSearchText] = useState("");
+
+  useEffect(() => {
+    async function _eventApiCall() {
+      eventList({ search: searchText, type: tabName });
+    }
+    _eventApiCall();
+  }, [searchText, tabName]);
+
+  useEffect(() => {
+    if (tabName === "live") {
+      setDatas(isEventListData?.data?.live);
+    } else if (tabName === "recent") {
+      setDatas(isEventListData?.data?.recent);
+    } else if (tabName === "upcoming") {
+      setDatas(isEventListData?.data?.upcoming);
+    }
+  }, [tabName, isEventListData]);
 
   const handlePageChange = async (page) => {
     setCurrentPage(page);
   };
 
   const startIndex = (currentPage - 1) * itemsPerPage;
-  const displayedData = datas.slice(startIndex, startIndex + itemsPerPage);
-
-  useEffect(() => {
-    if (tabName === "live") {
-      setDatas(liveData);
-    } else if (tabName === "recent") {
-      setDatas(recentData);
-    } else if (tabName === "upcoming") {
-      setDatas(upcomingData);
-    }
-  }, [tabName]);
+  const displayedData = datas?.slice(startIndex, startIndex + itemsPerPage);
 
   return (
     <div className="grow">
@@ -191,7 +206,13 @@ const EventList = () => {
             </div>
           </div>
           <div className="sm:flex items-center">
-            <SearchBar />
+            <SearchBar
+              value={searchText}
+              onChange={(text: any) => setSearchText(text.target.value)}
+              clearButton={() => {
+                setSearchText("");
+              }}
+            />
             <div className="flex justify-center sm:my-0 my-1">
               <button className="export-report px-3 py-2 ms-3 flex items-center rounded-md">
                 <BsFileEarmarkText className="button-icon" />
@@ -201,7 +222,7 @@ const EventList = () => {
           </div>
         </div>
         <div className="overflow-x-auto m-5">
-          <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+          <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 relative">
             <thead className="text-xs text-gray-700 bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
               <tr>
                 <th scope="col" className="px-6 py-4">
@@ -236,10 +257,15 @@ const EventList = () => {
                 </th>
               </tr>
             </thead>
-
-            <tbody>
-              {displayedData !== 0 &&
-                displayedData.map((item) => {
+            {isEventListFetching ? (
+              <div className="flex justify-center items-center h-96 ">
+                <Loading />
+              </div>
+            ) : (
+              <tbody>
+                {displayedData?.map((item: any, index: any) => {
+                  const serialNumber =
+                    (currentPage - 1) * itemsPerPage + index + 1;
                   return (
                     <tr
                       key={item.id}
@@ -249,7 +275,7 @@ const EventList = () => {
                         scope="row"
                         className="px-6 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                       >
-                        {item.id}
+                        {serialNumber}
                       </th>
                       <td className="px-6 py-3">{item.event_type}</td>
                       <td className="px-6 py-3">
@@ -285,31 +311,32 @@ const EventList = () => {
                     </tr>
                   );
                 })}
-            </tbody>
+              </tbody>
+            )}
           </table>
-          {displayedData?.length === 0 && (
-            <div className="flex items-center justify-center pt-5">
-              <span className="font-serif">
-                {tabName === "live"
-                  ? "No live events found"
-                  : tabName === "recent"
-                  ? "No recent events found"
-                  : "No upcoming events found"}
-              </span>
-            </div>
+          {!isEventListFetching && displayedData?.length === 0 && (
+            <span className="flex justify-center items-center h-96 ">
+              {tabName === "live"
+                ? MESSAGE.LIVE_EMPTY_MESSAGE
+                : tabName === "recent"
+                ? MESSAGE.RECENT_EMPTY_MESSAGE
+                : MESSAGE.UPCOMING_EMPTY_MESSAGE}
+            </span>
           )}
-          {datas !== undefined && datas.length > 10 && (
-            <div className="grid grid-cols-2">
-              <div />
-              <div className="ml-auto">
-                <Pagination
-                  currentPage={currentPage}
-                  totalPages={Math.ceil(datas.length / itemsPerPage)}
-                  onPageChange={handlePageChange}
-                />
+          {!isEventListFetching &&
+            datas !== undefined &&
+            datas?.length > 10 && (
+              <div className="grid grid-cols-2">
+                <div />
+                <div className="ml-auto">
+                  <Pagination
+                    currentPage={currentPage}
+                    totalPages={Math.ceil(datas?.length / itemsPerPage)}
+                    onPageChange={handlePageChange}
+                  />
+                </div>
               </div>
-            </div>
-          )}
+            )}
         </div>
       </div>
     </div>

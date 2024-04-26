@@ -6,6 +6,8 @@ import { authService } from "./services/AuthService";
 import { dashService } from "./services/DashboardService";
 import { teamService } from "./services/TeamListService";
 import { seasonService } from "./services/SeasonService";
+import { userService } from "./services/UserListService";
+import { eventService } from "./services/EventListService";
 
 //reducers
 import authReducer from "../redux/slices/AuthSlice";
@@ -20,6 +22,8 @@ export const store = configureStore({
     [dashService.reducerPath]: dashService.reducer,
     [teamService.reducerPath]: teamService.reducer,
     [seasonService.reducerPath]: seasonService.reducer,
+    [userService.reducerPath]: userService.reducer,
+    [eventService.reducerPath]: eventService.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({}).concat([
@@ -27,6 +31,8 @@ export const store = configureStore({
       dashService.middleware,
       teamService.middleware,
       seasonService.middleware,
+      userService.middleware,
+      eventService.middleware,
     ]),
 });
 

@@ -10,9 +10,11 @@ import Loading from "@/components/Loading";
 import { MESSAGE } from "@/utils/Constants";
 
 const TeamList = () => {
+  //api call
   const [teamList, { data: isTeamListData, isFetching: isTeamListFetching }] =
     useLazyTeamListQuery();
 
+  //local state
   const itemsPerPage = 10;
   const [currentPage, setCurrentPage] = useState(1);
   const handlePageChange = async (page: any) => {
@@ -62,7 +64,7 @@ const TeamList = () => {
         </div>
 
         <div className="overflow-x-auto m-5">
-          <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 sm:relative">
+          <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 relative">
             <thead className="text-xs text-gray-700 bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
               <tr>
                 <th scope="col" className="px-6 py-4">

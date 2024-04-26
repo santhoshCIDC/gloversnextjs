@@ -22,3 +22,14 @@ export const SEASON_API = {
   SEASON_CREATE: "/v1/user/admin/season-create",
   DELETE_SEASON: "/v1/user/inactive_season",
 };
+
+export const USER_LIST_API = {
+  COACH_LIST: "v1/user/admin/coach-list?",
+  STAFF_LIST: "v1/user/admin/staffs-list?",
+  PLAYER_LIST: "v1/user/admin/players-list?",
+  FAN_LIST: "v1/user/admin/fans-list?",
+};
+
+export const EVENT_LIST_API = {
+  EVENT_LIST: "v1/user/admin/events-tabs?",
+};

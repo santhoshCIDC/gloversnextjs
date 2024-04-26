@@ -6,356 +6,90 @@ import "./style.css";
 import Pagination from "@/components/Pagination";
 import { AiOutlineIdcard, AiOutlineFileText } from "react-icons/ai";
 import { BsFileEarmarkText } from "react-icons/bs";
+import {
+  useLazyCoachListQuery,
+  useLazyFanListQuery,
+  useLazyPlayerListQuery,
+  useLazyStaffListQuery,
+} from "@/redux/services/UserListService";
+import Loading from "@/components/Loading";
+import { MESSAGE } from "@/utils/Constants";
 const UserList = () => {
-  const coachData = [
-    {
-      id: "1",
-      first_name: "Amit",
-      last_name: "Amit",
-      email: "amit@gmail.com",
-      subscription_status: "Active",
-      team_name: "Royal",
-      user_status: true,
-    },
-    {
-      id: "2",
-      first_name: "Amit",
-      last_name: "Sonic",
-      email: "amitsonic@gmail.com",
-      subscription_status: "Active",
-      team_name: "CSK",
-      user_status: true,
-    },
-    {
-      id: "3",
-      first_name: "santhosh",
-      last_name: "kumar",
-      email: "santhosh@gmail.com",
-      subscription_status: "Active",
-      team_name: "Lions",
-      user_status: false,
-    },
-    {
-      id: "4",
-      first_name: "Dhivya",
-      last_name: "Dhivya",
-      email: "dhivya@gmail.com",
-      subscription_status: "Active",
-      team_name: "Tigers",
-      user_status: false,
-    },
-    {
-      id: "5",
-      first_name: "Sugu",
-      last_name: "Surya",
-      email: "amit@gmail.com",
-      subscription_status: "Active",
-      team_name: "King",
-      user_status: true,
-    },
-  ];
-  const staffData = [
-    {
-      id: "1",
-      first_name: "Surya",
-      last_name: "Surya",
-      email: "surya@gmail.com",
-      subscription_status: "Active",
-      team_name: "King",
-      user_status: true,
-    },
-    {
-      id: "2",
-      first_name: "santhosh",
-      last_name: "1234",
-      email: "san@gmail.com",
-      subscription_status: "Active",
-      team_name: "Tigers",
-      user_status: false,
-    },
-    {
-      id: "3",
-      first_name: "Surya",
-      last_name: "Surya",
-      email: "surya@gmail.com",
-      subscription_status: "Active",
-      team_name: "Tigers",
-      user_status: false,
-    },
-    {
-      id: "4",
-      first_name: "santhosh",
-      last_name: "1234",
-      email: "san@gmail.com",
-      subscription_status: "Active",
-      team_name: "Royal",
-      user_status: true,
-    },
-    {
-      id: "5",
-      first_name: "Surya",
-      last_name: "Surya",
-      email: "surya@gmail.com",
-      subscription_status: "Active",
-      team_name: "Royal",
-      user_status: true,
-    },
-    {
-      id: "6",
-      first_name: "santhosh",
-      last_name: "1234",
-      email: "san@gmail.com",
-      subscription_status: "Active",
-      team_name: "CSK",
-      user_status: true,
-    },
-    {
-      id: "7",
-      first_name: "Surya",
-      last_name: "Surya",
-      email: "surya@gmail.com",
-      subscription_status: "Active",
-      team_name: "CSK",
-      user_status: true,
-    },
-    {
-      id: "8",
-      first_name: "santhosh",
-      last_name: "1234",
-      email: "san@gmail.com",
-      subscription_status: "Active",
-    },
-    {
-      id: "9",
-      first_name: "Surya",
-      last_name: "Surya",
-      email: "surya@gmail.com",
-      subscription_status: "Active",
-    },
-    {
-      id: "10",
-      first_name: "santhosh",
-      last_name: "1234",
-      email: "san@gmail.com",
-      subscription_status: "Active",
-    },
-    {
-      id: "11",
-      first_name: "Surya",
-      last_name: "Surya",
-      email: "surya@gmail.com",
-      subscription_status: "Active",
-    },
-  ];
-  const playerData = [
-    {
-      id: "1",
-      first_name: "Surya",
-      last_name: "Surya",
-      email: "surya@gmail.com",
-      team_name: "Royal",
-      jersey_no: "01",
-      batting: "Right",
-      throwing: "Left",
-      user_status: true,
-    },
-    {
-      id: "2",
-      first_name: "santhosh",
-      last_name: "1234",
-      email: "san@gmail.com",
-      team_name: "Kings",
-      jersey_no: "01",
-      batting: "Right",
-      throwing: "Both",
-      user_status: true,
-    },
-    {
-      id: "3",
-      first_name: "Surya",
-      last_name: "Surya",
-      email: "surya@gmail.com",
-      team_name: "Tigers",
-      jersey_no: "01",
-      batting: "Right",
-      throwing: "Right",
-      user_status: true,
-    },
-    {
-      id: "4",
-      first_name: "santhosh",
-      last_name: "1234",
-      email: "san@gmail.com",
-      team_name: "CSK",
-      jersey_no: "01",
-      batting: "Left",
-      throwing: "Left",
-      user_status: true,
-    },
-    {
-      id: "5",
-      first_name: "Surya",
-      last_name: "Surya",
-      email: "surya@gmail.com",
-      team_name: "Royal",
-      jersey_no: "01",
-      batting: "Right",
-      throwing: "Left",
-      user_status: true,
-    },
-    {
-      id: "6",
-      first_name: "santhosh",
-      last_name: "1234",
-      email: "san@gmail.com",
-      team_name: "Kings",
-      jersey_no: "01",
-      batting: "Right",
-      throwing: "Both",
-      user_status: true,
-    },
-    {
-      id: "7",
-      first_name: "Surya",
-      last_name: "Surya",
-      email: "surya@gmail.com",
-      team_name: "Tigers",
-      jersey_no: "01",
-      batting: "Right",
-      throwing: "Right",
-      user_status: true,
-    },
-    {
-      id: "8",
-      first_name: "santhosh",
-      last_name: "1234",
-      email: "san@gmail.com",
-      team_name: "CSK",
-      jersey_no: "01",
-      batting: "Left",
-      throwing: "Left",
-      user_status: true,
-    },
-    {
-      id: "9",
-      first_name: "Surya",
-      last_name: "Surya",
-      email: "surya@gmail.com",
-      team_name: "Royal",
-      jersey_no: "01",
-      batting: "Right",
-      throwing: "Left",
-      user_status: true,
-    },
-    {
-      id: "10",
-      first_name: "santhosh",
-      last_name: "1234",
-      email: "san@gmail.com",
-      team_name: "Kings",
-      jersey_no: "01",
-      batting: "Right",
-      throwing: "Both",
-      user_status: true,
-    },
-    {
-      id: "11",
-      first_name: "Surya",
-      last_name: "Surya",
-      email: "surya@gmail.com",
-      team_name: "Tigers",
-      jersey_no: "01",
-      batting: "Right",
-      throwing: "Right",
-      user_status: true,
-    },
-    {
-      id: "12",
-      first_name: "santhosh",
-      last_name: "1234",
-      email: "san@gmail.com",
-      team_name: "CSK",
-      jersey_no: "01",
-      batting: "Left",
-      throwing: "Left",
-      user_status: true,
-    },
-  ];
-  const fanData = [
-    {
-      id: "1",
-      first_name: "Amit",
-      last_name: "Amit",
-      email: "amit@gmail.com",
-      subscription_status: "Active",
-      team_name: "Royal",
-      user_status: true,
-    },
-    {
-      id: "2",
-      first_name: "Amit",
-      last_name: "Sonic",
-      email: "amitsonic@gmail.com",
-      subscription_status: "Active",
-      team_name: "Royal",
-      user_status: true,
-    },
-    {
-      id: "3",
-      first_name: "santhosh",
-      last_name: "kumar",
-      email: "santhosh@gmail.com",
-      subscription_status: "Active",
-      team_name: "King",
-      user_status: true,
-    },
-    {
-      id: "4",
-      first_name: "Dhivya",
-      last_name: "Dhivya",
-      email: "dhivya@gmail.com",
-      subscription_status: "Active",
-      team_name: "Tigers",
-      user_status: true,
-    },
-    {
-      id: "5",
-      first_name: "Sugu",
-      last_name: "Surya",
-      email: "amit@gmail.com",
-      subscription_status: "Active",
-      team_name: "CSK",
-      user_status: true,
-    },
-  ];
+  // api call
+  const [
+    coachList,
+    { data: isCoachListData, isFetching: isCoachListFetching },
+  ] = useLazyCoachListQuery();
+  const [
+    staffList,
+    { data: isStaffListData, isFetching: isStaffListFetching },
+  ] = useLazyStaffListQuery();
+  const [
+    playerList,
+    { data: isPlayerListData, isFetching: isPlayerListFetching },
+  ] = useLazyPlayerListQuery();
+  const [fanList, { data: isFanListData, isFetching: isFanListFetching }] =
+    useLazyFanListQuery();
+
+  //local state
+  let dataFetching =
+    isCoachListFetching ||
+    isStaffListFetching ||
+    isPlayerListFetching ||
+    isFanListFetching;
   const itemsPerPage = 10;
   const [currentPage, setCurrentPage] = useState(1);
   const [tabName, setTabName] = useState("coach");
-  const [datas, setDatas] = useState(coachData);
+  const [datas, setDatas] = useState(isCoachListData?.data);
   const [modalOpen, setModalOpen] = useState(false);
   const [items, setItems] = useState("");
+  const [isChecked, setIsChecked] = useState(false);
+  const [searchText, setSearchText] = useState("");
+
+  useEffect(() => {
+    async function _usersApiCall() {
+      if (tabName === "coach") {
+        coachList({ search: searchText });
+      } else if (tabName === "staff") {
+        staffList({ search: searchText });
+      } else if (tabName === "player") {
+        playerList({ search: searchText });
+      } else {
+        fanList({ search: searchText });
+      }
+    }
+    _usersApiCall();
+  }, [tabName, searchText]);
+
+  useEffect(() => {
+    if (tabName === "coach") {
+      setDatas(isCoachListData?.data);
+    } else if (tabName === "staff") {
+      setDatas(isStaffListData?.data);
+    } else if (tabName === "player") {
+      setDatas(isPlayerListData?.data);
+    } else {
+      setDatas(isFanListData?.data);
+    }
+    setCurrentPage(1);
+  }, [
+    tabName,
+    isStaffListData,
+    isPlayerListData,
+    isFanListData,
+    isCoachListData,
+  ]);
+
   const handlePageChange = async (page) => {
     setCurrentPage(page);
   };
-  const [isChecked, setIsChecked] = useState(false);
 
   const handleCheckboxChange = () => {
     setIsChecked(!isChecked);
   };
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const displayedData = datas.slice(startIndex, startIndex + itemsPerPage);
 
-  useEffect(() => {
-    if (tabName === "coach") {
-      setDatas(coachData);
-    } else if (tabName === "staff") {
-      setDatas(staffData);
-    } else if (tabName === "player") {
-      setDatas(playerData);
-    } else {
-      setDatas(fanData);
-    }
-  }, [tabName]);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const displayedData = datas?.slice(startIndex, startIndex + itemsPerPage);
 
   const renderModalPopup = () => {
     return (
@@ -368,16 +102,16 @@ const UserList = () => {
               </div>
               <span className="hidden sm:inline-block sm:align-middle sm:h-screen"></span>
               <div className="inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full sm:p-6">
-                <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 relative">
                   <thead className="text-xs text-gray-700 bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
-                      <th scope="col" class="px-6 py-4">
+                      <th scope="col" className="px-6 py-4">
                         Team Name
                       </th>
-                      <th scope="col" class="px-6 py-4">
+                      <th scope="col" className="px-6 py-4">
                         Responsibility
                       </th>
-                      <th scope="col" class="px-6 py-4">
+                      <th scope="col" className="px-6 py-4">
                         User Status
                       </th>
                     </tr>
@@ -457,7 +191,13 @@ const UserList = () => {
             </div>
           </div>
           <div className="sm:flex items-center">
-            <SearchBar />
+            <SearchBar
+              value={searchText}
+              onChange={(text: any) => setSearchText(text.target.value)}
+              clearButton={() => {
+                setSearchText("");
+              }}
+            />
             <div className="flex justify-center sm:my-0 my-1">
               <button className="user-status px-3 py-2 ms-3 flex items-center rounded-md">
                 <AiOutlineIdcard className="button-icon" />
@@ -471,11 +211,14 @@ const UserList = () => {
           </div>
         </div>
         <div className="overflow-x-auto m-5">
-          <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+          <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 relative">
             <thead className="text-xs text-gray-700 bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
               <tr>
                 <th scope="col" className="px-6 py-4">
                   S No.
+                </th>
+                <th scope="col" className="px-6 py-4">
+                  UNIQUE ID
                 </th>
                 <th scope="col" className="px-6 py-4">
                   First Name
@@ -530,68 +273,118 @@ const UserList = () => {
                 )}
               </tr>
             </thead>
-            <tbody>
-              {displayedData.map((item) => {
-                return (
-                  <tr
-                    key={item.id}
-                    className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
-                  >
-                    <th
-                      scope="row"
-                      className="px-6 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+            {dataFetching ? (
+              <div className="flex justify-center items-center h-96 ">
+                <Loading />
+              </div>
+            ) : (
+              <tbody>
+                {displayedData?.map((item: any, index: any) => {
+                  const serialNumber =
+                    (currentPage - 1) * itemsPerPage + index + 1;
+                  return (
+                    <tr
+                      key={item.id}
+                      className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
                     >
-                      {item.id}
-                    </th>
-                    <td className="px-6 py-3">{item.first_name}</td>
-                    <td className="px-6 py-3">{item.last_name}</td>
-                    <td className="px-6 py-3">{item.email}</td>
-                    {tabName === "coach" && (
-                      <td className="px-6 py-3">{item.subscription_status}</td>
-                    )}
-                    {tabName === "player" && (
-                      <>
-                        <td className="px-6 py-3">{item.team_name}</td>
-                        <td className="px-6 py-3">{item.jersey_no}</td>
-                        <td className="px-6 py-3">{item.batting}</td>
-                        <td className="px-6 py-3">{item.throwing}</td>
-                        <td className="px-6 py-3">{item.user_status}</td>
-                      </>
-                    )}
-                    {tabName === "fan" && (
-                      <>
-                        <td className="px-6 py-3">
-                          {item.subscription_status}
-                        </td>
-                        <td className="px-6 py-3">{item.user_status}</td>
-                      </>
-                    )}
-                    {(tabName === "coach" || tabName === "staff") && (
-                      <td className="px-6 py-3">
-                        <button
-                          className="view-button px-3 py-1 rounded-md"
-                          onClick={() => {
-                            setModalOpen(true);
-                            setItems(item);
-                          }}
+                      <th
+                        scope="row"
+                        className="px-6 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                      >
+                        {serialNumber}
+                      </th>
+                      <td className="px-6 py-3">{item.customeid}</td>
+                      <td className="px-6 py-3">{item.first_name}</td>
+                      <td className="px-6 py-3">{item.last_name}</td>
+                      <td className="px-6 py-3">{item.email}</td>
+                      {tabName === "coach" && (
+                        <td
+                          className={`px-6 py-3 ${
+                            item.is_subscribe
+                              ? "active-green font-semibold"
+                              : " text-red-600 font-semibold"
+                          }`}
                         >
-                          View
-                        </button>
-                      </td>
-                    )}
-                  </tr>
-                );
-              })}
-            </tbody>
+                          {item.is_subscribe ? "ACTIVE" : "DEACTIVE"}
+                        </td>
+                      )}
+                      {tabName === "player" && (
+                        <>
+                          <td className="px-6 py-3">{item.team_name}</td>
+                          <td className="px-6 py-3">{item.jersy_no}</td>
+                          <td className="px-6 py-3">{item.batting_style}</td>
+                          <td className="px-6 py-3">{item.throwing_style}</td>
+                          <td
+                            className={`px-6 py-3 ${
+                              item.is_subscribe
+                                ? "active-green font-semibold"
+                                : " text-red-600 font-semibold"
+                            }`}
+                          >
+                            {item.status ? "ACTIVE" : "INACTIVE"}
+                          </td>
+                        </>
+                      )}
+                      {tabName === "fan" && (
+                        <>
+                          <td
+                            className={`px-6 py-3 ${
+                              item.is_subscribe
+                                ? "active-green font-semibold"
+                                : " text-red-600 font-semibold"
+                            }`}
+                          >
+                            {item.is_subscribe ? "ACTIVE" : "DEACTIVE"}
+                          </td>
+                          <td
+                            className={`px-6 py-3 ${
+                              item.is_subscribe
+                                ? "active-green font-semibold"
+                                : " text-red-600 font-semibold"
+                            }`}
+                          >
+                            {item.status ? "ACTIVE" : "INACTIVE"}
+                          </td>
+                        </>
+                      )}
+                      {(tabName === "coach" || tabName === "staff") && (
+                        <td className="px-6 py-3">
+                          <button
+                            className="view-button px-3 py-1 rounded-md"
+                            onClick={() => {
+                              setModalOpen(true);
+                              setItems(item);
+                            }}
+                          >
+                            View
+                          </button>
+                        </td>
+                      )}
+                    </tr>
+                  );
+                })}
+              </tbody>
+            )}
           </table>
+          {!dataFetching && datas?.length === 0 && (
+            <span className="flex justify-center items-center h-96 ">
+              {tabName === "coach"
+                ? MESSAGE.COACH_EMPTY_MESSAGE
+                : tabName === "staff"
+                ? MESSAGE.STAFF_EMPTY_MESSAGE
+                : tabName === "player"
+                ? MESSAGE.PLAYER_EMPTY_MESSAGE
+                : MESSAGE.FAN_EMPTY_MESSAGE}
+            </span>
+          )}
           {renderModalPopup()}
-          {datas !== undefined && datas.length > 10 && (
+          {!dataFetching && datas !== undefined && datas?.length > 10 && (
             <div className="grid grid-cols-2">
               <div />
               <div className="ml-auto">
                 <Pagination
                   currentPage={currentPage}
-                  totalPages={Math.ceil(datas.length / itemsPerPage)}
+                  totalPages={Math.ceil(datas?.length / itemsPerPage)}
                   onPageChange={handlePageChange}
                 />
               </div>
