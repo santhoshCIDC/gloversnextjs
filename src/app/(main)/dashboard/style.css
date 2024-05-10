@@ -18,14 +18,13 @@
   animation: waves 2.5s linear 1.9s forwards infinite; /* Add 'infinite' here */
 }
 
-.circle {
-  /* display: block; */
+/* .circle {
   height: 16px;
   width: 16px;
   border-radius: 50%;
   background: red;
   transition: 5s ease;
-}
+} */
 
 @-webkit-keyframes waves {
   0% {

@@ -159,38 +159,37 @@ const UserList = () => {
       <h5 className="border-t p-4">Users</h5>
 
       <div className="border mx-3 my-2 h-min">
-        <div className="sm:flex mx-6 justify-between border-b py-3 items-center">
-          <div className="sm:mb-0 mb-1">
-            <div className="text-center text-sm">
-              <div className="flex border items-center rounded-3xl">
-                <span
-                  className={`tab ${tabName === "coach" ? "active" : ""}`}
-                  onClick={() => setTabName("coach")}
-                >
-                  Coaches
-                </span>
-                <span
-                  className={`tab ${tabName === "staff" ? "active" : ""}`}
-                  onClick={() => setTabName("staff")}
-                >
-                  Staffs
-                </span>
-                <span
-                  className={`tab ${tabName === "player" ? "active" : ""}`}
-                  onClick={() => setTabName("player")}
-                >
-                  Players
-                </span>
-                <span
-                  className={`tab ${tabName === "fan" ? "active" : ""}`}
-                  onClick={() => setTabName("fan")}
-                >
-                  Fans
-                </span>
-              </div>
-            </div>
+        <div className="text-center text-sm sm:flex responsive justify-between mx-5 my-2 items-center">
+          <div
+            className="flex border tab-width items-center rounded-3xl sm:w-fit"
+            style={{ maxWidth: "-webkit-fill-available" }}
+          >
+            <span
+              className={`tab ${tabName === "coach" ? "active" : ""}`}
+              onClick={() => setTabName("coach")}
+            >
+              Coaches
+            </span>
+            <span
+              className={`tab ${tabName === "staff" ? "active" : ""}`}
+              onClick={() => setTabName("staff")}
+            >
+              Staffs
+            </span>
+            <span
+              className={`tab ${tabName === "player" ? "active" : ""}`}
+              onClick={() => setTabName("player")}
+            >
+              Players
+            </span>
+            <span
+              className={`tab ${tabName === "fan" ? "active" : ""}`}
+              onClick={() => setTabName("fan")}
+            >
+              Fans
+            </span>
           </div>
-          <div className="sm:flex items-center">
+          <div className="w-fit sm:flex" style={{ display: "ruby" }}>
             <SearchBar
               value={searchText}
               onChange={(text: any) => setSearchText(text.target.value)}
@@ -198,18 +197,17 @@ const UserList = () => {
                 setSearchText("");
               }}
             />
-            <div className="flex justify-center sm:my-0 my-1">
-              <button className="user-status px-3 py-2 ms-3 flex items-center rounded-md">
-                <AiOutlineIdcard className="button-icon" />
-                User Status
-              </button>
-              <button className="export-report px-3 py-2 ms-3 flex items-center rounded-md">
-                <BsFileEarmarkText className="button-icon" />
-                Export Report
-              </button>
-            </div>
+            <button className="user-status px-3 py-2 ms-0 sm:ms-3 my-1 sm:my-0 flex items-center rounded-md">
+              <AiOutlineIdcard className="button-icon" />
+              User Status
+            </button>
+            <button className="export-report px-3 py-2 ms-3 flex items-center rounded-md">
+              <BsFileEarmarkText className="button-icon" />
+              Export Report
+            </button>
           </div>
         </div>
+       
         <div className="overflow-x-auto m-5">
           <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 relative">
             <thead className="text-xs text-gray-700 bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -327,6 +325,7 @@ const UserList = () => {
                       )}
                       {tabName === "fan" && (
                         <>
+                          <td className="px-6 py-3">{item.team_name}</td>
                           <td
                             className={`px-6 py-3 ${
                               item.is_subscribe
@@ -334,16 +333,7 @@ const UserList = () => {
                                 : " text-red-600 font-semibold"
                             }`}
                           >
-                            {item.is_subscribe ? "ACTIVE" : "DEACTIVE"}
-                          </td>
-                          <td
-                            className={`px-6 py-3 ${
-                              item.is_subscribe
-                                ? "active-green font-semibold"
-                                : " text-red-600 font-semibold"
-                            }`}
-                          >
-                            {item.status ? "ACTIVE" : "INACTIVE"}
+                            {item.is_subscribe ? "ACTIVE" : "INACTIVE"}
                           </td>
                         </>
                       )}

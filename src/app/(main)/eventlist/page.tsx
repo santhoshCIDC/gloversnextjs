@@ -180,7 +180,7 @@ const EventList = () => {
       <h5 className="border-t p-4">Events</h5>
 
       <div className="border mx-3 my-2 h-min">
-        <div className="sm:flex mx-6 justify-between border-b py-3 items-center">
+        {/* <div className="sm:flex mx-6 justify-between border-b py-3 items-center">
           <div className="sm:mb-0 mb-1">
             <div className="text-center text-sm">
               <div className="flex border items-center rounded-3xl">
@@ -219,6 +219,44 @@ const EventList = () => {
                 Export Report
               </button>
             </div>
+          </div>
+        </div> */}
+        <div className="text-center text-sm lg:flex justify-between mx-5 my-2 items-center">
+          <div
+            className="flex border tab-width items-center rounded-3xl sm:w-fit"
+            style={{ maxWidth: "-webkit-fill-available" }}
+          >
+            <span
+              className={`tab ${tabName === "live" ? "active" : ""}`}
+              onClick={() => setTabName("live")}
+            >
+              Live
+            </span>
+            <span
+              className={`tab ${tabName === "recent" ? "active" : ""}`}
+              onClick={() => setTabName("recent")}
+            >
+              Recent
+            </span>
+            <span
+              className={`tab ${tabName === "upcoming" ? "active" : ""}`}
+              onClick={() => setTabName("upcoming")}
+            >
+              Upcoming
+            </span>
+          </div>
+          <div className="w-fit sm:flex" style={{ display: "ruby" }}>
+            <SearchBar
+              value={searchText}
+              onChange={(text: any) => setSearchText(text.target.value)}
+              clearButton={() => {
+                setSearchText("");
+              }}
+            />
+            <button className="export-report px-3 py-2 ms-3 flex items-center rounded-md">
+              <BsFileEarmarkText className="button-icon" />
+              Export Report
+            </button>
           </div>
         </div>
         <div className="overflow-x-auto m-5">

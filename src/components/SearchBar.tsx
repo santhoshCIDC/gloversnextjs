@@ -8,10 +8,10 @@ type props = {
 };
 const SearchBar = ({ value, onChange, clearButton }: props) => {
   return (
-    <div className="sm:w-96 flex items-center rounded-full px-3 light-grey h-10">
+    <div className="flex items-center rounded-full px-3 light-grey h-10 mt-2 sm:mt-0">
       <IoSearch style={{ height: "22px", width: "22px" }} />
       <input
-        className="w-96 light-grey h-10 text-black px-2 text-sm"
+        className="sm:w-80 light-grey h-10 text-black px-2 text-sm"
         type="text"
         placeholder="Search..."
         value={value}

@@ -74,7 +74,7 @@ const Dropdown = () => {
           />
         </motion.button>
         <ul
-          className="absolute light-grey mt-11 w-fit rounded-md"
+          className="absolute light-grey mt-11 w-fit rounded-md z-20"
           style={{
             pointerEvents: isOpen ? "auto" : "none",
             clipPath: "inset(10% 50% 90% 50% round 10px)",

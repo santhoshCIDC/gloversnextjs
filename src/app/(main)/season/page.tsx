@@ -239,6 +239,7 @@ const Season = () => {
               }}
               confirmButtonColor="login-btn"
               confirmButtonHoverColor="login-btn"
+              disabled={false}
             >
               <span className="flex items-center justify-center mb-5 underline">
                 {`${modalFrom} Season`}

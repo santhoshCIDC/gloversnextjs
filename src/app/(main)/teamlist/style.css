@@ -12,3 +12,12 @@
   border-radius: 6rem;
   align-items: center;
 }
+.export-report {
+  background-color: #3796f3;
+  color: white;
+  font-weight: 300;
+  font-size: 14px;
+}
+.export-report:hover {
+  background-color: #0e80f1;
+}

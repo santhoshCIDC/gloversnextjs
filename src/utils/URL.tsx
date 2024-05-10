@@ -33,3 +33,11 @@ export const USER_LIST_API = {
 export const EVENT_LIST_API = {
   EVENT_LIST: "v1/user/admin/events-tabs?",
 };
+
+export const SUBSCRIPTION_API = {
+  SUBSCRIPTION_PLAN: "v1/user/admin/get_subscription_plans",
+  PROMO_CODE_LIST: "v1/user/admin/get_promocodes",
+  CREATE_PROMO_CODE: "v1/user/admin/create_promocodes",
+  DELETE_PROMO_CODE: "/v1/user/admin/delete_promocodes",
+  TRANSACTION_LIST: "/v1/user/admin/get_trancastion_details?",
+};

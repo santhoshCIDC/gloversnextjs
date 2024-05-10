@@ -46,7 +46,7 @@ const TeamList = () => {
           <div className="sm:mb-0 mb-1">
             <span className="border-b-2 borderBottomColor">Team List</span>
           </div>
-          <div className="sm:flex items-center">
+          <div className="w-fit sm:flex" style={{ display: "ruby" }}>
             <SearchBar
               value={searchText}
               onChange={(text: any) => setSearchText(text.target.value)}
@@ -54,12 +54,10 @@ const TeamList = () => {
                 setSearchText("");
               }}
             />
-            <div className="flex justify-center sm:my-0 my-1">
-              <button className="export-report px-3 py-2 ms-3 flex items-center rounded-md">
-                <BsFileEarmarkText className="button-icon" />
-                Export Report
-              </button>
-            </div>
+            <button className="export-report px-3 py-2 ms-3 flex items-center rounded-md">
+              <BsFileEarmarkText className="button-icon" />
+              Export Report
+            </button>
           </div>
         </div>
 

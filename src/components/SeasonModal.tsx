@@ -10,6 +10,7 @@ type props = {
   children: ReactNode;
   confirmButtonColor: string;
   confirmButtonHoverColor: string;
+  disabled: boolean;
 };
 const SeasonModal = ({
   modalOpen,
@@ -20,11 +21,12 @@ const SeasonModal = ({
   onCancelClick,
   confirmButtonColor,
   confirmButtonHoverColor,
+  disabled,
 }: props) => {
   return (
     <div>
       {modalOpen && (
-        <div className="fixed z-20 inset-0 overflow-y-auto">
+        <div className="fixed inset-0 overflow-y-auto">
           <div className="flex items-center justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0">
             <div className="fixed inset-0 transition-opacity">
               <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
@@ -38,6 +40,7 @@ const SeasonModal = ({
                     type="button"
                     className={`inline-flex justify-center w-full rounded-md border border-transparent px-4 py-2 ${confirmButtonColor} text-base leading-6 font-medium text-white shadow-sm hover:${confirmButtonHoverColor} focus:outline-none focus:shadow-outline-green transition ease-in-out duration-150 sm:text-sm sm:leading-5`}
                     onClick={onConfirmClick}
+                    disabled={disabled}
                   >
                     {confirmButtonText}
                   </button>
