@@ -2,7 +2,7 @@ import { Mutex } from "async-mutex";
 
 import { BaseQueryFn, fetchBaseQuery } from "@reduxjs/toolkit/query";
 import { RootState } from "@/redux/Store";
-
+import Utility from "./Utility";
 
 const baseUrl = process.env.NEXT_PUBLIC_URl;
 
@@ -11,15 +11,15 @@ const mutex = new Mutex();
 const baseQuery = fetchBaseQuery({
   baseUrl,
   prepareHeaders: (headers, { getState }) => {
-    const token: any | null = (getState() as RootState).authState?.tokenDetails?.access_token;
-  
-    console.log("getState--",token);
+    const token: any | null = (getState() as RootState).authState?.tokenDetails
+      ?.access_token;
+
     if (token) {
       // const idToken =
       //   typeof token === "string"
       //     ? JSON.parse(token).idToken.jwtToken
       //     : token.idToken.jwtToken;
-     
+
       headers.set("Authorization", token);
     }
     return headers;
@@ -36,12 +36,16 @@ const customFetchBase: CustomFetchBaseType = async (
     await mutex.waitForUnlock();
 
     let result = await baseQuery(args, api, extraOptions);
+    console.log("result--------->", result);
 
     if (result?.error?.status === 401) {
       if (!mutex.isLocked()) {
         const release = await mutex.acquire();
         try {
           //  add functions for the refreshtoken
+          Utility.toastMessage(result?.error?.data?.error);
+          localStorage.clear();
+          window.location.href = "/login";
         } finally {
           release();
         }

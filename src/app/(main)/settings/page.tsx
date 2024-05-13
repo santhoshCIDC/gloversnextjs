@@ -1,8 +1,30 @@
+"use client";
 import Dropdown from "@/components/Dropdown";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./style.css";
+import { useLazyEventCreationSettingQuery } from "@/redux/services/SettingService";
 
 const Settings = () => {
+  const [evenCreation, { data: isEventCreationData }] =
+    useLazyEventCreationSettingQuery();
+
+  const [numberOfPlayers, setNumberOfPlayers] = useState("");
+  const [numberOfCoaches, setNumberOfCoaches] = useState("");
+
+  useEffect(() => {
+    async function _apiCall() {
+      evenCreation({});
+    }
+    _apiCall();
+  }, []);
+
+  useEffect(() => {
+    setNumberOfPlayers(isEventCreationData?.data?.total_no_players_home_team);
+    setNumberOfCoaches(
+      isEventCreationData?.data?.no_of_staffs_coaches_home_team
+    );
+  }, [isEventCreationData]);
+
   return (
     <div className="grow">
       <div className="flex sm:justify-end justify-center sm:px-4 sm:py-6  sm:my-0 my-2">
@@ -24,8 +46,18 @@ const Settings = () => {
             <div className="flex flex-row ml-10">
               <div className="flex flex-col">
                 <span className="py-2 titleStyle">Value</span>
-                <input type="text" className="border my-6 w-7 px-1" />
-                <input type="text" className="border my-6 w-7 px-1" />
+                <input
+                  type="text"
+                  className="border my-6 w-7 px-1"
+                  value={numberOfPlayers}
+                  onChange={(text) => setNumberOfPlayers(text.target.value)}
+                />
+                <input
+                  type="text"
+                  className="border my-6 w-7 px-1"
+                  value={numberOfCoaches}
+                  onChange={(text) => setNumberOfCoaches(text.target.value)}
+                />
               </div>
               <div className="flex flex-col ml-10">
                 <span className="py-2 titleStyle">Action</span>

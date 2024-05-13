@@ -106,7 +106,10 @@ const Dropdown = () => {
             className={`flex cursor-pointer rounded p-2 ${
               modalOpen && "dropdown-active"
             }`}
-            onClick={() => setModalOpen(true)}
+            onClick={() => {
+              setModalOpen(true);
+              localStorage.clear();
+            }}
           >
             <IoLogOut className="mr-1 h-6 w-6" />
             Logout

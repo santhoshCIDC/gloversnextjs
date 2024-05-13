@@ -1,23 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const isLocalStorageAvailable = () => {
-  try {
-    const testKey = "__testKey__";
-    localStorage.setItem(testKey, testKey);
-    localStorage.removeItem(testKey);
-    return true;
-  } catch (e) {
-    return false;
-  }
-};
-
 const initialState = {
   userDetails: localStorage?.getItem("userDetails")
-    ? JSON.parse(localStorage.getItem("userDetails") || "")
+    ? localStorage.getItem("userDetails")
     : null,
 
   tokenDetails: localStorage.getItem("tokenDetails")
-    ? JSON.parse(localStorage.getItem("tokenDetails") || "")
+    ? JSON.parse(localStorage.getItem("tokenDetails")) 
     : null,
 };
 
@@ -26,15 +15,17 @@ export const authSlice = createSlice({
   name: "auth",
   reducers: {
     userDetails: (state, action) => {
+      console.log("pyalod", action.payload);
+
       // userDetails
       state.userDetails = action.payload?.user;
-      localStorage.setItem("userDetails", JSON.stringify(action.payload.user));
-      
+      localStorage.setItem("userDetails", JSON.stringify(action.payload?.user));
+
       // tokenDetails
       state.tokenDetails = action.payload?.token_details;
       localStorage.setItem(
         "tokenDetails",
-        JSON.stringify(action.payload.token_details)
+        JSON.stringify(action.payload?.token_details)
       );
     },
   },

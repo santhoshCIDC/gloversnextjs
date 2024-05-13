@@ -2,6 +2,7 @@
 export const AUTH_API = {
   LOGIN: "v1/auth/adminlogin",
   FORGOT_PASSWORD: "v1/auth/forgotPassword",
+  REFRESH_TOKEN: "v1/auth/refresh_token",
 };
 
 export const DASHBOARD_API = {
@@ -40,4 +41,9 @@ export const SUBSCRIPTION_API = {
   CREATE_PROMO_CODE: "v1/user/admin/create_promocodes",
   DELETE_PROMO_CODE: "/v1/user/admin/delete_promocodes",
   TRANSACTION_LIST: "/v1/user/admin/get_trancastion_details?",
+};
+
+export const SETTINGS_API = {
+  EVENT_CREATION_SETTINGS: "v1/user/admin/eventcreation-settings",
+  EVENT_SETTINGS: "v1/user/admin/event-settings",
 };

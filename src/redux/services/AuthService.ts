@@ -20,7 +20,18 @@ export const authService = createApi({
         body,
       }),
     }),
+    refreshToken: builder.mutation({
+      query: (body) => ({
+        url: AUTH_API.REFRESH_TOKEN,
+        method: "POST",
+        body,
+      }),
+    }),
   }),
 });
 
-export const { useLoginMutation, useForgotPasswordMutation } = authService;
+export const {
+  useLoginMutation,
+  useForgotPasswordMutation,
+  useRefreshTokenMutation,
+} = authService;
