@@ -4,12 +4,57 @@ import React, { useEffect, useState } from "react";
 import { BiTachometer, BiUserCircle, BiCalendar } from "react-icons/bi";
 import { HiOutlineUserGroup } from "react-icons/hi";
 import { AiOutlineDollar, AiOutlineSetting } from "react-icons/ai";
-import { useRouter } from "next/navigation";
 import { IMAGES } from "@/utils/SharedImages";
+import Link from "next/link";
+
+const navData = [
+  {
+    id: 1,
+    title: "Dashboard",
+    nav: "dashboard",
+    icon: <BiTachometer className="dashboardIconSize" />,
+  },
+  {
+    id: 2,
+    title: "User Lists",
+    nav: "userlist",
+    icon: <BiUserCircle className="dashboardIconSize" />,
+  },
+  {
+    id: 3,
+    title: "Team Lists",
+    nav: "teamlist",
+    icon: <HiOutlineUserGroup className="dashboardIconSize" />,
+  },
+  {
+    id: 4,
+    title: "Event Lists",
+    nav: "eventlist",
+    icon: <BiCalendar className="dashboardIconSize" />,
+  },
+  {
+    id: 5,
+    title: "Seasons",
+    nav: "season",
+    icon: <HiOutlineUserGroup className="dashboardIconSize" />,
+  },
+  {
+    id: 6,
+    title: "Subscription Plan",
+    nav: "subscriptionplan",
+    icon: <AiOutlineDollar className="dashboardIconSize" />,
+  },
+  {
+    id: 7,
+    title: "Settings",
+    nav: "settings",
+    icon: <AiOutlineSetting className="dashboardIconSize" />,
+  },
+];
 
 const SideBar = () => {
-  const route = useRouter();
-  const [activeTab, setActiveTab] = useState("");
+  const [activeTab, setActiveTab] = useState("/dashboard");
+
   const activeclassName =
     "flex items-center space-x-2 p-4 transition duration-200 dashboard activeTab";
   const inActiveclassName =
@@ -39,7 +84,7 @@ const SideBar = () => {
         </a>
 
         <label
-          for="menu-open"
+          htmlFor="menu-open"
           id="mobile-menu-button"
           className="m-2 p-2 focus:outline-none hover:text-white h-10 w-10 dashboard rounded-md"
         >
@@ -89,115 +134,39 @@ const SideBar = () => {
           className="flex flex-col space-y-6"
           data-dev-hint="optional div for having an extra footer navigation"
         >
-          <label
-            for="menu-open"
-            className="text-white flex items-center space-x-2 px-4"
-            onClick={() => {
-              setActiveTab("dashboard");
-              route.push("/dashboard");
-            }}
-          >
-            <Image
-              src={IMAGES.app_logo}
-              alt=""
-              className="w-full"
-            />
-          </label>
-          <span className="px-4 text-sm">Main Menu</span>
-          <nav data-dev-hint="main navigation">
+          <Link href={"/dashboard"}>
             <label
-              for="menu-open"
-              className={
-                activeTab === "dashboard" ? activeclassName : inActiveclassName
-              }
+              htmlFor="menu-open"
+              className="text-white flex items-center space-x-2 px-4"
               onClick={() => {
-                route.push("/dashboard");
                 setActiveTab("dashboard");
               }}
             >
-              <BiTachometer className="dashboardIconSize" />
-              <span>Dashboard</span>
+              <Image src={IMAGES.app_logo} alt="" className="w-full" />
             </label>
-            <label
-              for="menu-open"
-              className={
-                activeTab === "userlist" ? activeclassName : inActiveclassName
-              }
-              onClick={() => {
-                setActiveTab("userlist");
-                route.push("/userlist");
-              }}
-            >
-              <BiUserCircle className="dashboardIconSize" />
-              <span>User Lists</span>
-            </label>
-            <label
-              for="menu-open"
-              className={
-                activeTab === "teamlist" ? activeclassName : inActiveclassName
-              }
-              onClick={() => {
-                setActiveTab("teamlist");
-                route.push("/teamlist");
-              }}
-            >
-              <HiOutlineUserGroup className="dashboardIconSize" />
-              <span>Team Lists</span>
-            </label>
-            <label
-              for="menu-open"
-              className={
-                activeTab === "eventlist" ? activeclassName : inActiveclassName
-              }
-              onClick={() => {
-                setActiveTab("eventlist");
-                route.push("/eventlist");
-              }}
-            >
-              <BiCalendar className="dashboardIconSize" />
-              <span>Event Lists</span>
-            </label>
-            <label
-              for="menu-open"
-              className={
-                activeTab === "season" ? activeclassName : inActiveclassName
-              }
-              onClick={() => {
-                setActiveTab("season");
-                route.push("/season");
-              }}
-            >
-              <HiOutlineUserGroup className="dashboardIconSize" />
-              <span>Season</span>
-            </label>
-            <label
-              for="menu-open"
-              className={
-                activeTab === "subscriptionplan"
-                  ? activeclassName
-                  : inActiveclassName
-              }
-              onClick={() => {
-                setActiveTab("subscriptionplan");
-                route.push("/subscriptionplan");
-              }}
-            >
-              <AiOutlineDollar className="dashboardIconSize" />
-              <span>Subscription Plan</span>
-            </label>
-            <label
-              for="menu-open"
-              className={
-                activeTab === "settings" ? activeclassName : inActiveclassName
-              }
-              onClick={() => {
-                setActiveTab("settings");
-                route.push("/settings");
-              }}
-            >
-              <AiOutlineSetting className="dashboardIconSize" />
-              <span>Settings</span>
-            </label>
+          </Link>
+          <span className="px-4 text-sm">Main Menu</span>
+          <nav data-dev-hint="main navigation">
+            {navData.map((item) => {
+              return (
+                <Link key={item.id} href={item.nav}>
+                  <label
+                    htmlFor="menu-open"
+                    className={
+                      activeTab === item.nav
+                        ? activeclassName
+                        : inActiveclassName
+                    }
+                    onClick={() => {
+                      setActiveTab(item.nav);
+                    }}
+                  >
+                    {item.icon}
+                    <span>{item.title}</span>
+                  </label>
+                </Link>
+              );
+            })}
           </nav>
         </div>
       </aside>

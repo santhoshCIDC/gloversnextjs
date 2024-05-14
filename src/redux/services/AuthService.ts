@@ -27,6 +27,20 @@ export const authService = createApi({
         body,
       }),
     }),
+    editProfile: builder.mutation({
+      query: (body) => ({
+        url: AUTH_API.EDIT_PROFILE,
+        method: "POST",
+        body,
+      }),
+    }),
+    changePassword: builder.mutation({
+      query: (body) => ({
+        url: AUTH_API.CHANGE_PASSWORD,
+        method: "POST",
+        body,
+      }),
+    }),
   }),
 });
 
@@ -34,4 +48,6 @@ export const {
   useLoginMutation,
   useForgotPasswordMutation,
   useRefreshTokenMutation,
+  useEditProfileMutation,
+  useChangePasswordMutation,
 } = authService;

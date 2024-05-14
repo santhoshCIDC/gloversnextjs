@@ -105,10 +105,10 @@ export const Transaction = ({ search, fromDate, toDate, dateSearch }: any) => {
                         : "Monthly"}
                     </td>
                     <td className="px-6 py-3">
-                      {moment(item.startDate).format("MM/DD/YYYY")}
+                      {moment(item.data?.startDate).format("MM/DD/YYYY")}
                     </td>
                     <td className="px-6 py-3">
-                      {moment(item.endDate).format("MM/DD/YYYY")}
+                      {moment(item.data?.endDate).format("MM/DD/YYYY")}
                     </td>
                     <td className="px-6 py-3">{item.username}</td>
                   </tr>

@@ -8,6 +8,7 @@ import { BsFileEarmarkText } from "react-icons/bs";
 import { useLazyEventListQuery } from "@/redux/services/EventListService";
 import { MESSAGE } from "@/utils/Constants";
 import Loading from "@/components/Loading";
+import moment from "moment";
 
 const EventList = () => {
   const liveData = [
@@ -335,17 +336,21 @@ const EventList = () => {
                       </td>
                       <td
                         className={`px-6 py-3 ${
-                          item.result === "In Progress"
-                            ? "blue"
-                            : item.result === "End"
+                          item.game_status === "LIVE"
                             ? "red"
+                            : item.game_status === "END"
+                            ? "green"
                             : null
                         } `}
                       >
-                        {item.result}
+                        {item.game_status}
                       </td>
-                      <td className="px-6 py-3">{item.game_date}</td>
-                      <td className="px-6 py-3">{"01.00 AM"}</td>
+                      <td className="px-6 py-3">
+                        {moment(item.game_start_date).format("MM/DD/YYYY")}
+                      </td>
+                      <td className="px-6 py-3">
+                        {moment(item.game_start_date).format("h:m A")}
+                      </td>
                     </tr>
                   );
                 })}

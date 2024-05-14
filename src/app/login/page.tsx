@@ -59,11 +59,7 @@ const Login = () => {
           </span>
         </div>
         <div className="card lg:3/4 xl:w-3/4 w-full md:w-11/12 justify-center p-6">
-          <Image
-            className="logo flex m-auto"
-            src={IMAGES.app_logo}
-            alt=""
-          />
+          <Image className="logo flex m-auto" src={IMAGES.app_logo} alt="" />
           <div className="flex flex-col mt-6">
             <span className="ms-3">Email :</span>
             <input
@@ -92,8 +88,8 @@ const Login = () => {
             <ButtonLoading
               loading={isLoading}
               onClickButton={() => onClickSubmit()}
-              loadingLabel="Please wait..."
               buttonLabel="Login"
+              btnClassName="login-btn w-full rounded-md py-2 mt-3"
             />
           </div>
           <div className="flex flex-row justify-center mt-6 gap-2">

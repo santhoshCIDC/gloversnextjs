@@ -24,6 +24,7 @@ import {
   useLazyTeamMatricsQuery,
   useLazyUserMatricsQuery,
 } from "@/redux/services/DashboardService";
+import Link from "next/link";
 
 const Dashboard = () => {
   const eventGraphColors = ["#1E9F4D", "#E2922F", "#E573A4"];
@@ -109,7 +110,7 @@ const Dashboard = () => {
       <div className="flex justify-between mx-6 border-b py-3">
         <span>Events</span>
         <div className="flex">
-          {live ? (
+          {isEventTabsData?.data?.live.length >= 1 ? (
             <GoDotFill className="delay1" style={{ color: "red" }} />
           ) : (
             <GoDotFill
@@ -117,10 +118,14 @@ const Dashboard = () => {
             />
           )}
           <span className="text-xs">Live:</span>
-          {live && (
-            <span className="text-xs ml-2" style={{ color: "#0d6efd" }}>
-              Royal vs Tigers
-            </span>
+          {isEventTabsData?.data?.live.length >= 1 && (
+            <Link
+              href={"/eventlist"}
+              className="text-xs ml-2 hover:underline cursor-pointer"
+              style={{ color: "#0d6efd" }}
+            >
+              {`${isEventTabsData?.data?.live[0]?.playing_team} vs ${isEventTabsData?.data?.live[0]?.opponent_team}`}
+            </Link>
           )}
           <span className="text-xs ml-3" style={{ color: "#0d6efd" }}>
             View all

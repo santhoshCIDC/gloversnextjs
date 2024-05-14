@@ -10,6 +10,7 @@ import { useAnimate, stagger, motion } from "framer-motion";
 import { usePathname, useRouter } from "next/navigation";
 import ClosingModal from "./ClosingModal";
 import { IMAGES } from "@/utils/SharedImages";
+import { useSelector } from "react-redux";
 
 const staggerMenuItems = stagger(0.1, { startDelay: 0.15 });
 
@@ -18,6 +19,9 @@ const Dropdown = () => {
   const pathName = usePathname();
   const [isOpen, setIsOpen] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
+  const userDetails = useSelector((state) => state.authState?.userDetails);
+  console.log( "dropdown",userDetails);
+  
   const scope = useMenuAnimation(isOpen);
   function useMenuAnimation(isOpen) {
     const [scope, animate] = useAnimate();
@@ -63,7 +67,7 @@ const Dropdown = () => {
           onClick={() => setIsOpen(!isOpen)}
         >
           <PiUserCircleFill style={{ height: "22px", width: "22px" }} />
-          <h4 className="mx-3">Glovers admin</h4>
+          <h4 className="mx-3">{userDetails?.username}</h4>
           <PiCaretDownBold
             className="arrow"
             style={{

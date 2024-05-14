@@ -3,6 +3,8 @@ export const AUTH_API = {
   LOGIN: "v1/auth/adminlogin",
   FORGOT_PASSWORD: "v1/auth/forgotPassword",
   REFRESH_TOKEN: "v1/auth/refresh_token",
+  EDIT_PROFILE: "v1/user/profile-update",
+  CHANGE_PASSWORD: "v1/auth/changePassword",
 };
 
 export const DASHBOARD_API = {

@@ -2,11 +2,11 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   userDetails: localStorage?.getItem("userDetails")
-    ? localStorage.getItem("userDetails")
+    ? JSON.parse(localStorage.getItem("userDetails"))
     : null,
 
   tokenDetails: localStorage.getItem("tokenDetails")
-    ? JSON.parse(localStorage.getItem("tokenDetails")) 
+    ? JSON.parse(localStorage.getItem("tokenDetails"))
     : null,
 };
 
@@ -15,8 +15,6 @@ export const authSlice = createSlice({
   name: "auth",
   reducers: {
     userDetails: (state, action) => {
-      console.log("pyalod", action.payload);
-
       // userDetails
       state.userDetails = action.payload?.user;
       localStorage.setItem("userDetails", JSON.stringify(action.payload?.user));
@@ -28,10 +26,15 @@ export const authSlice = createSlice({
         JSON.stringify(action.payload?.token_details)
       );
     },
+    profileUpdate: (state, action) => {
+      // userDetails
+      state.userDetails = action.payload;
+      localStorage.setItem("userDetails", JSON.stringify(action.payload));
+    },
   },
 });
 
-export const { userDetails } = authSlice.actions;
+export const { userDetails, profileUpdate } = authSlice.actions;
 export const currentUser = (state: any) => state.userState.user;
 
 export default authSlice.reducer;

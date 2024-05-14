@@ -18,6 +18,7 @@ const SearchBar = ({ value, onChange, clearButton }: props) => {
         onChange={onChange}
       />
       <IoCloseCircleOutline
+        className="cursor-pointer"
         style={{ height: "22px", width: "22px" }}
         onClick={clearButton}
       />

@@ -4,21 +4,18 @@ import { Bars } from "react-loader-spinner";
 type props = {
   onClickButton: () => void;
   loading: boolean;
-  loadingLabel: string;
   buttonLabel: string;
+  btnClassName: string;
 };
 
 const ButtonLoading = ({
   onClickButton,
   loading,
-  loadingLabel,
   buttonLabel,
+  btnClassName,
 }: props) => {
   return (
-    <button
-      className="login-btn w-full rounded-md py-2 mt-3"
-      onClick={onClickButton}
-    >
+    <button className={btnClassName} onClick={onClickButton}>
       {loading ? (
         <div className="flex items-center justify-center">
           <Bars
