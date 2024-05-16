@@ -26,4 +26,5 @@ export const MESSAGE = {
   PLAYER_EMPTY_MESSAGE: "Players are not found",
   FAN_EMPTY_MESSAGE: "Fans are not found",
   TRANSCATION_EMPTY_MESSAGE: "Transcations are not found",
+  NO_DATA_FOUND_MESSAGE: "No data found",
 };

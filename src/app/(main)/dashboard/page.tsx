@@ -119,17 +119,22 @@ const Dashboard = () => {
           )}
           <span className="text-xs">Live:</span>
           {isEventTabsData?.data?.live.length >= 1 && (
-            <Link
-              href={"/eventlist"}
-              className="text-xs ml-2 hover:underline cursor-pointer"
+            <span
+              className="text-xs ml-2 underline"
               style={{ color: "#0d6efd" }}
             >
               {`${isEventTabsData?.data?.live[0]?.playing_team} vs ${isEventTabsData?.data?.live[0]?.opponent_team}`}
-            </Link>
+            </span>
           )}
-          <span className="text-xs ml-3" style={{ color: "#0d6efd" }}>
-            View all
-          </span>
+          <Link
+            href={"/eventlist"}
+            className="text-xs ml-2 hover:underline cursor-pointer"
+            style={{ color: "#0d6efd" }}
+          >
+            <span className="text-xs ml-3" style={{ color: "#0d6efd" }}>
+              View all
+            </span>
+          </Link>
         </div>
       </div>
       <div>

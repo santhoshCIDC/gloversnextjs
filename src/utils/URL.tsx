@@ -31,6 +31,12 @@ export const USER_LIST_API = {
   STAFF_LIST: "v1/user/admin/staffs-list?",
   PLAYER_LIST: "v1/user/admin/players-list?",
   FAN_LIST: "v1/user/admin/fans-list?",
+  TEAM_RESPONSIBILITY_LIST: "v1/user/admin/team-responsibility",
+  STAFF_RESPONSIBILITY_LIST: "v1/user/admin/staff-responsibility",
+  UPDATE_COACH_STATUS: "v1/user/admin/update-coach-status",
+  UPDATE_STAFF_STATUS: "v1/user/admin/update-staff-status",
+  UPDATE_PLAYER_STATUS: "v1/user/admin/update-player-status",
+  UPDATE_FAN_STATUS: "v1/user/admin/update-fan-status",
 };
 
 export const EVENT_LIST_API = {

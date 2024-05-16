@@ -20,8 +20,6 @@ const Dropdown = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
   const userDetails = useSelector((state) => state.authState?.userDetails);
-  console.log( "dropdown",userDetails);
-  
   const scope = useMenuAnimation(isOpen);
   function useMenuAnimation(isOpen) {
     const [scope, animate] = useAnimate();
@@ -134,6 +132,7 @@ const Dropdown = () => {
             setModalOpen(false);
             route.push("/login");
           }}
+          disabled={false}
         />
       )}
     </div>

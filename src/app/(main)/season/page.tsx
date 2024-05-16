@@ -313,6 +313,7 @@ const Season = () => {
             buttonOnClick={() => {
               seasonDelete({ season_id: seasonData?._id });
             }}
+            disabled={false}
           />
         )}
       </div>

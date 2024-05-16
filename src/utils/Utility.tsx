@@ -1,16 +1,16 @@
-"use client"
+"use client";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
 import { REGEX } from "./Constants";
 
 export default class Utility {
-  static validateEmail(email) {
+  static validateEmail(email: string) {
     return String(email).toLowerCase().match(REGEX.EMAIL);
   }
-  static validatePassword(password) {
+  static validatePassword(password: string) {
     return String(password).toLowerCase().match(REGEX.PASSWORD);
   }
-  static toastMessage(message) {
+  static toastMessage(message: string) {
     return toast(message);
   }
 }

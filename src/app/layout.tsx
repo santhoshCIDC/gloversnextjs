@@ -3,7 +3,8 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { ReduxProvider } from "@/redux/Provider";
 import { ToastMessage } from "@/utils/Utility";
-
+import "rsuite/dist/rsuite-no-reset.min.css";
+import { CustomProvider } from "rsuite";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -20,8 +21,8 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <ReduxProvider>
-        {children}
-        <ToastMessage/>
+          <CustomProvider>{children}</CustomProvider>
+          <ToastMessage />
         </ReduxProvider>
       </body>
     </html>
