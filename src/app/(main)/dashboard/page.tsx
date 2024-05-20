@@ -146,7 +146,7 @@ const Dashboard = () => {
         </div>
       </div>
       <div>
-        <div className="grid sm:grid-cols-4 md:grid-cols-2 lg:grid-cols-4 grid-cols-none ">
+        <div className="grid sm:grid-cols-4 md:grid-cols-2 lg:grid-cols-4 grid-cols-none dash">
           <DashboardCard
             data={[
               {
