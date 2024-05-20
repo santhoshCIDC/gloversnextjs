@@ -25,6 +25,7 @@ import {
   useLazyUserMatricsQuery,
 } from "@/redux/services/DashboardService";
 import Link from "next/link";
+import GlobalSearch from "./GlobalSearch";
 
 const Dashboard = () => {
   const eventGraphColors = ["#1E9F4D", "#E2922F", "#E573A4"];
@@ -37,10 +38,10 @@ const Dashboard = () => {
   const [eventMatric, { data: isEventMaticsData }] = useLazyEventMatricsQuery();
 
   const [userMatrisData, setUserMatricsData] = useState(0);
+  const [searchText, setSearchText] = useState("");
   const handleTabClick = (tab) => {
     setActiveTab(tab);
   };
-  let live = false;
 
   useEffect(() => {
     async function _matricsApiCall() {
@@ -103,9 +104,16 @@ const Dashboard = () => {
   return (
     <div className="grow">
       <div className="md:flex justify-between sm:px-4 sm:py-6">
-        <SearchBar />
+        <SearchBar
+          value={searchText}
+          onChange={(text: any) => setSearchText(text.target.value)}
+          clearButton={() => {
+            setSearchText("");
+          }}
+        />
         <Dropdown />
       </div>
+      {searchText && <GlobalSearch searchText={searchText} />}
       <h5 className="border-y p-4">Dashboard</h5>
       <div className="flex justify-between mx-6 border-b py-3">
         <span>Events</span>

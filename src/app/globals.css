@@ -49,7 +49,20 @@
   text-decoration-line: underline;
   cursor: pointer;
 }
-
+.pagination {
+  cursor: pointer;
+  width: 3rem;
+  align-self: center;
+  padding: 3px;
+  border-radius: 6rem;
+}
+.pagination.active {
+  color: #ffffff;
+  background-color: #005dab;
+  border-color: #005dab;
+  border-radius: 6rem;
+  align-items: center;
+}
 .active-green {
   color: #00ab41;
 }

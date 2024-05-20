@@ -41,6 +41,13 @@ export const dashService = createApi({
         params,
       }),
     }),
+    globalSearch: builder.mutation({
+      query: (body) => ({
+        url: DASHBOARD_API.GLOBAL_SEARCH,
+        method: "POST",
+        body,
+      }),
+    }),
   }),
 });
 
@@ -50,4 +57,5 @@ export const {
   useLazyUserMatricsQuery,
   useLazyEventTabsQuery,
   useLazyEventMatricsQuery,
+  useGlobalSearchMutation,
 } = dashService;
