@@ -172,7 +172,7 @@
 }
 .dash :hover {
   transition: 2.5s all linear;
-  transform: rotateY(360deg);
+  transform: rotateX(360deg);
   cursor: pointer;
 }
 .dashboardBox2 {

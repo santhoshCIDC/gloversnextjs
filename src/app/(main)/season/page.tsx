@@ -6,6 +6,7 @@ import { MdDeleteForever, MdCalendarMonth } from "react-icons/md";
 import { PiPencilDuotone } from "react-icons/pi";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import moment from "moment";
 
 // components
 import Dropdown from "@/components/Dropdown";
@@ -18,10 +19,10 @@ import {
   useSeasonDeleteMutation,
 } from "@/redux/services/SeasonService";
 import { MESSAGE } from "@/utils/Constants";
-import moment from "moment";
 import Utility, { ToastMessage } from "@/utils/Utility";
 import ClosingModal from "@/components/ClosingModal";
 import { IMAGES } from "@/utils/SharedImages";
+import Animation from "@/components/Animation";
 
 const Season = () => {
   //api call
@@ -108,217 +109,219 @@ const Season = () => {
   };
 
   return (
-    <div className="grow">
-      <div className="flex sm:justify-end justify-center sm:px-4 sm:py-6  sm:my-0 my-2">
-        <Dropdown />
-      </div>
-      <h5 className="border-t p-4">Season</h5>
+    <Animation>
+      <div className="grow">
+        <div className="flex sm:justify-end justify-center sm:px-4 sm:py-6  sm:my-0 my-2">
+          <Dropdown />
+        </div>
+        <h5 className="border-t p-4">Season</h5>
 
-      <div className="border mx-3 my-2 h-min">
-        <div className="sm:flex mx-6 justify-between border-b py-3 items-center">
-          <div className="sm:mb-0 mb-1">
-            <span className="border-b-2 borderBottomColor">Season List</span>
-          </div>
-          <div className="sm:flex items-center">
-            <div className="flex justify-center sm:my-0 my-1">
-              <span
-                className="light-grey px-2 cursor-pointer py-2"
-                onClick={() => {
-                  setModalOpen(true);
-                  setmodalFrom("Create");
-                }}
-              >
-                Create Season
-              </span>
+        <div className="border mx-3 my-2 h-min">
+          <div className="sm:flex mx-6 justify-between border-b py-3 items-center">
+            <div className="sm:mb-0 mb-1">
+              <span className="border-b-2 borderBottomColor">Season List</span>
+            </div>
+            <div className="sm:flex items-center">
+              <div className="flex justify-center sm:my-0 my-1">
+                <span
+                  className="light-grey px-2 cursor-pointer py-2"
+                  onClick={() => {
+                    setModalOpen(true);
+                    setmodalFrom("Create");
+                  }}
+                >
+                  Create Season
+                </span>
+              </div>
             </div>
           </div>
-        </div>
-        <div className="overflow-x-auto m-5">
-          <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 relative">
-            <thead className="text-xs text-gray-700 bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-              <tr>
-                <th scope="col" className="px-6 py-4">
-                  S No.
-                </th>
-                <th scope="col" className="px-6 py-4">
-                  Season
-                </th>
-                <th scope="col" className="px-6 py-4">
-                  Update
-                </th>
-                <th scope="col" className="px-6 py-4">
-                  Delete
-                </th>
-                <th scope="col" className="px-6 py-4">
-                  Status
-                </th>
-              </tr>
-            </thead>
-            {isSeasonListFetching ? (
-              <div className="flex justify-center items-center h-96 ">
-                <Loading />
-              </div>
-            ) : (
-              <tbody>
-                {isSeasonListData?.data?.Season?.map(
-                  (item: any, index: any) => {
-                    let serialNumer = index + 1;
-                    return (
-                      <tr
-                        key={item.id}
-                        className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
-                      >
-                        <th
-                          scope="row"
-                          className="px-6 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+          <div className="overflow-x-auto m-5">
+            <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 relative">
+              <thead className="text-xs text-gray-700 bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                <tr>
+                  <th scope="col" className="px-6 py-4">
+                    S No.
+                  </th>
+                  <th scope="col" className="px-6 py-4">
+                    Season
+                  </th>
+                  <th scope="col" className="px-6 py-4">
+                    Update
+                  </th>
+                  <th scope="col" className="px-6 py-4">
+                    Delete
+                  </th>
+                  <th scope="col" className="px-6 py-4">
+                    Status
+                  </th>
+                </tr>
+              </thead>
+              {isSeasonListFetching ? (
+                <div className="flex justify-center items-center h-96 ">
+                  <Loading />
+                </div>
+              ) : (
+                <tbody>
+                  {isSeasonListData?.data?.Season?.map(
+                    (item: any, index: any) => {
+                      let serialNumer = index + 1;
+                      return (
+                        <tr
+                          key={item.id}
+                          className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
                         >
-                          {serialNumer}
-                        </th>
-                        <td className="px-6 py-3">{item.values}</td>
-                        <td
-                          className="px-6 py-3"
-                          onClick={() => {
-                            onClickEdit(item);
-                            setSeasonData(item);
-                          }}
-                        >
-                          <Tooltip
-                            icon={
-                              <PiPencilDuotone className="seasonIconSize cursor-pointer" />
-                            }
-                            text={"Edit"}
-                          />
-                        </td>
-                        <td
-                          className="px-6 py-3"
-                          onClick={() => {
-                            setModalOpen(true);
-                            setSeasonData(item);
-                          }}
-                        >
-                          <Tooltip
-                            icon={
-                              <MdDeleteForever className="seasonIconSize cursor-pointer" />
-                            }
-                            text={"Delete"}
-                          />
-                        </td>
-                        <td
-                          className={`px-6 py-3 ${
-                            item.status === "ACTIVE"
-                              ? "active-green font-semibold"
-                              : "text-red font-semibold"
-                          }`}
-                        >
-                          {item.status}
-                        </td>
-                      </tr>
-                    );
-                  }
-                )}
-              </tbody>
-            )}
-          </table>
-          {!isSeasonListFetching && isSeasonListData?.data?.length === 0 && (
-            <span className="flex justify-center items-center h-96 ">
-              {MESSAGE.SEASONS_EMPTY_MESSAGE}
-            </span>
-          )}
-          {modalFrom && (
-            <SeasonModal
-              modalOpen={modalOpen}
-              confirmButtonText={`${
-                modalFrom === "Create" ? "Create" : "Update"
-              }`}
-              cancelButtonText={"Close"}
-              onCancelClick={() => {
-                _resetState();
-              }}
-              onConfirmClick={() => {
-                onClickConfirm();
-              }}
-              confirmButtonColor="login-btn"
-              confirmButtonHoverColor="login-btn"
-              disabled={false}
-            >
-              <span className="flex items-center justify-center mb-5 underline">
-                {`${modalFrom} Season`}
+                          <th
+                            scope="row"
+                            className="px-6 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                          >
+                            {serialNumer}
+                          </th>
+                          <td className="px-6 py-3">{item.values}</td>
+                          <td
+                            className="px-6 py-3"
+                            onClick={() => {
+                              onClickEdit(item);
+                              setSeasonData(item);
+                            }}
+                          >
+                            <Tooltip
+                              icon={
+                                <PiPencilDuotone className="seasonIconSize cursor-pointer" />
+                              }
+                              text={"Edit"}
+                            />
+                          </td>
+                          <td
+                            className="px-6 py-3"
+                            onClick={() => {
+                              setModalOpen(true);
+                              setSeasonData(item);
+                            }}
+                          >
+                            <Tooltip
+                              icon={
+                                <MdDeleteForever className="seasonIconSize cursor-pointer" />
+                              }
+                              text={"Delete"}
+                            />
+                          </td>
+                          <td
+                            className={`px-6 py-3 ${
+                              item.status === "ACTIVE"
+                                ? "active-green font-semibold"
+                                : "text-red font-semibold"
+                            }`}
+                          >
+                            {item.status}
+                          </td>
+                        </tr>
+                      );
+                    }
+                  )}
+                </tbody>
+              )}
+            </table>
+            {!isSeasonListFetching && isSeasonListData?.data?.length === 0 && (
+              <span className="flex justify-center items-center h-96 ">
+                {MESSAGE.SEASONS_EMPTY_MESSAGE}
               </span>
-              <div className="flex flex-col mx-6">
-                <div className="flex items-center">
-                  <span className="flex-1">Seasons Name:</span>
-                  <input
-                    className="custom-date-picker"
-                    placeholder="Type a Season Name"
-                    value={seasonName}
-                    onChange={(text) => setSeasonName(text.target.value)}
-                  />
-                </div>
-                <div className="flex items-center my-5">
-                  <span className="flex-1">Start Date:</span>
-                  <div
-                    className="relative items-center flex max-w-fit"
-                    style={{ margin: "auto", paddingLeft: "10px" }}
-                  >
-                    <DatePicker
-                      selected={startSelectedDate}
-                      onChange={(date) => setStartSelectedDate(date)}
-                      placeholderText={"mm/dd/yyyy"}
-                      dateFormat="MM/dd/yyyy"
+            )}
+            {modalFrom && (
+              <SeasonModal
+                modalOpen={modalOpen}
+                confirmButtonText={`${
+                  modalFrom === "Create" ? "Create" : "Update"
+                }`}
+                cancelButtonText={"Close"}
+                onCancelClick={() => {
+                  _resetState();
+                }}
+                onConfirmClick={() => {
+                  onClickConfirm();
+                }}
+                confirmButtonColor="login-btn"
+                confirmButtonHoverColor="login-btn"
+                disabled={false}
+              >
+                <span className="flex items-center justify-center mb-5 underline">
+                  {`${modalFrom} Season`}
+                </span>
+                <div className="flex flex-col mx-6">
+                  <div className="flex items-center">
+                    <span className="flex-1">Seasons Name:</span>
+                    <input
                       className="custom-date-picker"
-                      autoComplete="off"
-                      minDate={startSelectedDate || null}
-                    />
-                    <MdCalendarMonth
-                      className="absolute"
-                      style={{ right: "20px", height: "20px", width: "20px" }}
+                      placeholder="Type a Season Name"
+                      value={seasonName}
+                      onChange={(text) => setSeasonName(text.target.value)}
                     />
                   </div>
-                </div>
-                <div className="flex items-center">
-                  <span className="flex-1">End Date:</span>
-                  <div
-                    className="relative items-center flex max-w-fit"
-                    style={{ margin: "auto", paddingLeft: "10px" }}
-                  >
-                    <DatePicker
-                      selected={endSelectedDate}
-                      onChange={(date) => setEndSelectedDate(date)}
-                      placeholderText={"mm/dd/yyyy"}
-                      dateFormat="MM/dd/yyyy"
-                      className="custom-date-picker"
-                      autoComplete="off"
-                      minDate={startSelectedDate || null}
-                    />
-                    <MdCalendarMonth
-                      className="absolute"
-                      style={{ right: "20px", height: "20px", width: "20px" }}
-                    />
+                  <div className="flex items-center my-5">
+                    <span className="flex-1">Start Date:</span>
+                    <div
+                      className="relative items-center flex max-w-fit"
+                      style={{ margin: "auto", paddingLeft: "10px" }}
+                    >
+                      <DatePicker
+                        selected={startSelectedDate}
+                        onChange={(date) => setStartSelectedDate(date)}
+                        placeholderText={"mm/dd/yyyy"}
+                        dateFormat="MM/dd/yyyy"
+                        className="custom-date-picker"
+                        autoComplete="off"
+                        minDate={startSelectedDate || null}
+                      />
+                      <MdCalendarMonth
+                        className="absolute"
+                        style={{ right: "20px", height: "20px", width: "20px" }}
+                      />
+                    </div>
+                  </div>
+                  <div className="flex items-center">
+                    <span className="flex-1">End Date:</span>
+                    <div
+                      className="relative items-center flex max-w-fit"
+                      style={{ margin: "auto", paddingLeft: "10px" }}
+                    >
+                      <DatePicker
+                        selected={endSelectedDate}
+                        onChange={(date) => setEndSelectedDate(date)}
+                        placeholderText={"mm/dd/yyyy"}
+                        dateFormat="MM/dd/yyyy"
+                        className="custom-date-picker"
+                        autoComplete="off"
+                        minDate={startSelectedDate || null}
+                      />
+                      <MdCalendarMonth
+                        className="absolute"
+                        style={{ right: "20px", height: "20px", width: "20px" }}
+                      />
+                    </div>
                   </div>
                 </div>
-              </div>
-            </SeasonModal>
+              </SeasonModal>
+            )}
+          </div>
+          {modalOpen && !modalFrom && (
+            <ClosingModal
+              image={IMAGES.sad_emoji}
+              popTitle="Season"
+              popContent=" Are you sure want to delete the "
+              popBoldContent={`${seasonData?.values}?`}
+              buttonText="Delete"
+              cancelButtonOnClick={() => {
+                setModalOpen(false);
+              }}
+              buttonOnClick={() => {
+                seasonDelete({ season_id: seasonData?._id });
+              }}
+              disabled={false}
+            />
           )}
         </div>
-        {modalOpen && !modalFrom && (
-          <ClosingModal
-            image={IMAGES.sad_emoji}
-            popTitle="Season"
-            popContent=" Are you sure want to delete the "
-            popBoldContent={`${seasonData?.values}?`}
-            buttonText="Delete"
-            cancelButtonOnClick={() => {
-              setModalOpen(false);
-            }}
-            buttonOnClick={() => {
-              seasonDelete({ season_id: seasonData?._id });
-            }}
-            disabled={false}
-          />
-        )}
+        {ToastMessage()}
       </div>
-      {ToastMessage()}
-    </div>
+    </Animation>
   );
 };
 

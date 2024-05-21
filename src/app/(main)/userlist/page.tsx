@@ -1,11 +1,18 @@
 "use client";
-import Dropdown from "@/components/Dropdown";
-import SearchBar from "@/components/SearchBar";
+
+//imports
 import React, { useEffect, useState } from "react";
 import "./style.css";
-import Pagination from "@/components/Pagination";
 import { AiOutlineIdcard, AiOutlineFileText } from "react-icons/ai";
 import { BsFileEarmarkText } from "react-icons/bs";
+import { Toggle } from "rsuite";
+import { RotatingLines } from "react-loader-spinner";
+
+//components
+import Dropdown from "@/components/Dropdown";
+import SearchBar from "@/components/SearchBar";
+import Pagination from "@/components/Pagination";
+
 import {
   useLazyCoachListQuery,
   useLazyFanListQuery,
@@ -20,11 +27,10 @@ import {
 } from "@/redux/services/UserListService";
 import Loading from "@/components/Loading";
 import { MESSAGE } from "@/utils/Constants";
-import { Toggle } from "rsuite";
 import ClosingModal from "@/components/ClosingModal";
 import { IMAGES } from "@/utils/SharedImages";
 import Utility from "@/utils/Utility";
-import { RotatingLines } from "react-loader-spinner";
+import Animation from "@/components/Animation";
 
 const UserList = () => {
   // api call
@@ -265,181 +271,151 @@ const UserList = () => {
   };
 
   return (
-    <div className="grow">
-      <div className="flex sm:justify-end justify-center sm:px-4 sm:py-6  sm:my-0 my-2">
-        <Dropdown />
-      </div>
-      <h5 className="border-t p-4">Users</h5>
-
-      <div className="border mx-3 my-2 h-min">
-        <div className="text-center text-sm sm:flex responsive justify-between mx-5 my-2 items-center">
-          <div
-            className="flex border tab-width items-center rounded-3xl sm:w-fit"
-            style={{ maxWidth: "-webkit-fill-available" }}
-          >
-            <span
-              className={`tab ${tabName === "coach" ? "active" : ""}`}
-              onClick={() => setTabName("coach")}
-            >
-              Coaches
-            </span>
-            <span
-              className={`tab ${tabName === "staff" ? "active" : ""}`}
-              onClick={() => setTabName("staff")}
-            >
-              Staffs
-            </span>
-            <span
-              className={`tab ${tabName === "player" ? "active" : ""}`}
-              onClick={() => setTabName("player")}
-            >
-              Players
-            </span>
-            <span
-              className={`tab ${tabName === "fan" ? "active" : ""}`}
-              onClick={() => setTabName("fan")}
-            >
-              Fans
-            </span>
-          </div>
-          <div className="w-fit sm:flex" style={{ display: "ruby" }}>
-            <SearchBar
-              value={searchText}
-              onChange={(text: any) => setSearchText(text.target.value)}
-              clearButton={() => {
-                setSearchText("");
-              }}
-            />
-            <button className="user-status px-3 py-2 ms-0 sm:ms-3 my-1 sm:my-0 flex items-center rounded-md">
-              <AiOutlineIdcard className="button-icon" />
-              User Status
-            </button>
-            <button className="export-report px-3 py-2 ms-3 flex items-center rounded-md">
-              <BsFileEarmarkText className="button-icon" />
-              Export Report
-            </button>
-          </div>
+    <Animation>
+      <div className="grow">
+        <div className="flex sm:justify-end justify-center sm:px-4 sm:py-6  sm:my-0 my-2">
+          <Dropdown />
         </div>
-       
-        <div className="overflow-x-auto m-5">
-          <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 relative">
-            <thead className="text-xs text-gray-700 bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-              <tr>
-                <th scope="col" className="px-6 py-4">
-                  S No.
-                </th>
-                <th scope="col" className="px-6 py-4">
-                  UNIQUE ID
-                </th>
-                <th scope="col" className="px-6 py-4">
-                  First Name
-                </th>
-                <th scope="col" className="px-6 py-4">
-                  Last Name
-                </th>
-                <th scope="col" className="px-6 py-4">
-                  Email
-                </th>
-                {tabName === "coach" && (
+        <h5 className="border-t p-4">Users</h5>
+
+        <div className="border mx-3 my-2 h-min">
+          <div className="text-center text-sm sm:flex responsive justify-between mx-5 my-2 items-center">
+            <div
+              className="flex border tab-width items-center rounded-3xl sm:w-fit"
+              style={{ maxWidth: "-webkit-fill-available" }}
+            >
+              <span
+                className={`tab ${tabName === "coach" ? "active" : ""}`}
+                onClick={() => setTabName("coach")}
+              >
+                Coaches
+              </span>
+              <span
+                className={`tab ${tabName === "staff" ? "active" : ""}`}
+                onClick={() => setTabName("staff")}
+              >
+                Staffs
+              </span>
+              <span
+                className={`tab ${tabName === "player" ? "active" : ""}`}
+                onClick={() => setTabName("player")}
+              >
+                Players
+              </span>
+              <span
+                className={`tab ${tabName === "fan" ? "active" : ""}`}
+                onClick={() => setTabName("fan")}
+              >
+                Fans
+              </span>
+            </div>
+            <div className="w-fit sm:flex" style={{ display: "ruby" }}>
+              <SearchBar
+                value={searchText}
+                onChange={(text: any) => setSearchText(text.target.value)}
+                clearButton={() => {
+                  setSearchText("");
+                }}
+              />
+              <button className="user-status px-3 py-2 ms-0 sm:ms-3 my-1 sm:my-0 flex items-center rounded-md">
+                <AiOutlineIdcard className="button-icon" />
+                User Status
+              </button>
+              <button className="export-report px-3 py-2 ms-3 flex items-center rounded-md">
+                <BsFileEarmarkText className="button-icon" />
+                Export Report
+              </button>
+            </div>
+          </div>
+
+          <div className="overflow-x-auto m-5">
+            <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 relative">
+              <thead className="text-xs text-gray-700 bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                <tr>
                   <th scope="col" className="px-6 py-4">
-                    Subscription Status
+                    S No.
                   </th>
-                )}
-                {(tabName === "staff" || tabName === "coach") && (
                   <th scope="col" className="px-6 py-4">
-                    Team Details
+                    UNIQUE ID
                   </th>
-                )}
-                {tabName === "player" && (
-                  <>
-                    <th scope="col" className="px-6 py-4">
-                      Team Name
-                    </th>
-                    <th scope="col" className="px-6 py-4">
-                      Jersey #
-                    </th>
-                    <th scope="col" className="px-6 py-4">
-                      Batting
-                    </th>
-                    <th scope="col" className="px-6 py-4">
-                      Throwing
-                    </th>
-                    <th scope="col" className="px-6 py-4">
-                      User Status
-                    </th>
-                  </>
-                )}
-                {tabName === "fan" && (
-                  <>
-                    <th scope="col" className="px-6 py-4">
-                      Team Name
-                    </th>
+                  <th scope="col" className="px-6 py-4">
+                    First Name
+                  </th>
+                  <th scope="col" className="px-6 py-4">
+                    Last Name
+                  </th>
+                  <th scope="col" className="px-6 py-4">
+                    Email
+                  </th>
+                  {tabName === "coach" && (
                     <th scope="col" className="px-6 py-4">
                       Subscription Status
                     </th>
+                  )}
+                  {(tabName === "staff" || tabName === "coach") && (
                     <th scope="col" className="px-6 py-4">
-                      User Status
+                      Team Details
                     </th>
-                  </>
-                )}
-              </tr>
-            </thead>
-            {dataFetching ? (
-              <div className="flex justify-center items-center h-96 ">
-                <Loading />
-              </div>
-            ) : (
-              <tbody>
-                {displayedData?.map((item: any, index: any) => {
-                  const serialNumber =
-                    (currentPage - 1) * itemsPerPage + index + 1;
-                  return (
-                    <tr
-                      key={item.id}
-                      className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
-                    >
-                      <th
-                        scope="row"
-                        className="px-6 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                      >
-                        {serialNumber}
+                  )}
+                  {tabName === "player" && (
+                    <>
+                      <th scope="col" className="px-6 py-4">
+                        Team Name
                       </th>
-                      <td className="px-6 py-3">{item.customeid}</td>
-                      <td className="px-6 py-3">{item.first_name}</td>
-                      <td className="px-6 py-3">{item.last_name}</td>
-                      <td className="px-6 py-3">{item.email}</td>
-                      {tabName === "coach" && (
-                        <td
-                          className={`px-6 py-3 ${
-                            item.is_subscribe
-                              ? "active-green font-semibold"
-                              : " text-red-600 font-semibold"
-                          }`}
+                      <th scope="col" className="px-6 py-4">
+                        Jersey #
+                      </th>
+                      <th scope="col" className="px-6 py-4">
+                        Batting
+                      </th>
+                      <th scope="col" className="px-6 py-4">
+                        Throwing
+                      </th>
+                      <th scope="col" className="px-6 py-4">
+                        User Status
+                      </th>
+                    </>
+                  )}
+                  {tabName === "fan" && (
+                    <>
+                      <th scope="col" className="px-6 py-4">
+                        Team Name
+                      </th>
+                      <th scope="col" className="px-6 py-4">
+                        Subscription Status
+                      </th>
+                      <th scope="col" className="px-6 py-4">
+                        User Status
+                      </th>
+                    </>
+                  )}
+                </tr>
+              </thead>
+              {dataFetching ? (
+                <div className="flex justify-center items-center h-96 ">
+                  <Loading />
+                </div>
+              ) : (
+                <tbody>
+                  {displayedData?.map((item: any, index: any) => {
+                    const serialNumber =
+                      (currentPage - 1) * itemsPerPage + index + 1;
+                    return (
+                      <tr
+                        key={item.id}
+                        className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
+                      >
+                        <th
+                          scope="row"
+                          className="px-6 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                         >
-                          {item.is_subscribe ? "ACTIVE" : "DEACTIVE"}
-                        </td>
-                      )}
-                      {tabName === "player" && (
-                        <>
-                          <td className="px-6 py-3">{item.team_name}</td>
-                          <td className="px-6 py-3">{item.jersy_no}</td>
-                          <td className="px-6 py-3">{item.batting_style}</td>
-                          <td className="px-6 py-3">{item.throwing_style}</td>
-                          <td className="px-6 py-3">
-                            <Toggle
-                              checked={item.status}
-                              onChange={() => {
-                                setToggleChecked(item.status ? false : true);
-                                setToggleItem(item);
-                                setToggleModalOpen(true);
-                              }}
-                            />
-                          </td>
-                        </>
-                      )}
-                      {tabName === "fan" && (
-                        <>
-                          <td className="px-6 py-3">{item.team_name}</td>
+                          {serialNumber}
+                        </th>
+                        <td className="px-6 py-3">{item.customeid}</td>
+                        <td className="px-6 py-3">{item.first_name}</td>
+                        <td className="px-6 py-3">{item.last_name}</td>
+                        <td className="px-6 py-3">{item.email}</td>
+                        {tabName === "coach" && (
                           <td
                             className={`px-6 py-3 ${
                               item.is_subscribe
@@ -447,130 +423,170 @@ const UserList = () => {
                                 : " text-red-600 font-semibold"
                             }`}
                           >
-                            {item.is_subscribe ? "ACTIVE" : "INACTIVE"}
+                            {item.is_subscribe ? "ACTIVE" : "DEACTIVE"}
                           </td>
+                        )}
+                        {tabName === "player" && (
+                          <>
+                            <td className="px-6 py-3">{item.team_name}</td>
+                            <td className="px-6 py-3">{item.jersy_no}</td>
+                            <td className="px-6 py-3">{item.batting_style}</td>
+                            <td className="px-6 py-3">{item.throwing_style}</td>
+                            <td className="px-6 py-3">
+                              <Toggle
+                                checked={item.status}
+                                onChange={() => {
+                                  setToggleChecked(item.status ? false : true);
+                                  setToggleItem(item);
+                                  setToggleModalOpen(true);
+                                }}
+                              />
+                            </td>
+                          </>
+                        )}
+                        {tabName === "fan" && (
+                          <>
+                            <td className="px-6 py-3">{item.team_name}</td>
+                            <td
+                              className={`px-6 py-3 ${
+                                item.is_subscribe
+                                  ? "active-green font-semibold"
+                                  : " text-red-600 font-semibold"
+                              }`}
+                            >
+                              {item.is_subscribe ? "ACTIVE" : "INACTIVE"}
+                            </td>
+                            <td className="px-6 py-3">
+                              <Toggle
+                                checked={item.status}
+                                onChange={() => {
+                                  setToggleChecked(item.status ? false : true);
+                                  setToggleItem(item);
+                                  setToggleModalOpen(true);
+                                }}
+                              />
+                            </td>
+                          </>
+                        )}
+                        {(tabName === "coach" || tabName === "staff") && (
                           <td className="px-6 py-3">
-                            <Toggle
-                              checked={item.status}
-                              onChange={() => {
-                                setToggleChecked(item.status ? false : true);
-                                setToggleItem(item);
-                                setToggleModalOpen(true);
+                            <button
+                              className="view-button px-3 py-1 rounded-md"
+                              onClick={async () => {
+                                setModalOpen(true);
+                                if (tabName === "coach") {
+                                  await teamResponsibility({
+                                    email: item.email,
+                                  });
+                                } else {
+                                  await staffResponsibility({
+                                    email: item.email,
+                                  });
+                                }
                               }}
-                            />
+                            >
+                              View
+                            </button>
                           </td>
-                        </>
-                      )}
-                      {(tabName === "coach" || tabName === "staff") && (
-                        <td className="px-6 py-3">
-                          <button
-                            className="view-button px-3 py-1 rounded-md"
-                            onClick={async () => {
-                              setModalOpen(true);
-                              if (tabName === "coach") {
-                                await teamResponsibility({ email: item.email });
-                              } else {
-                                await staffResponsibility({
-                                  email: item.email,
-                                });
-                              }
-                            }}
-                          >
-                            View
-                          </button>
-                        </td>
-                      )}
-                    </tr>
-                  );
-                })}
-              </tbody>
+                        )}
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              )}
+            </table>
+            {!dataFetching && datas?.length === 0 && (
+              <span className="flex justify-center items-center h-96 ">
+                {tabName === "coach"
+                  ? MESSAGE.COACH_EMPTY_MESSAGE
+                  : tabName === "staff"
+                  ? MESSAGE.STAFF_EMPTY_MESSAGE
+                  : tabName === "player"
+                  ? MESSAGE.PLAYER_EMPTY_MESSAGE
+                  : MESSAGE.FAN_EMPTY_MESSAGE}
+              </span>
             )}
-          </table>
-          {!dataFetching && datas?.length === 0 && (
-            <span className="flex justify-center items-center h-96 ">
-              {tabName === "coach"
-                ? MESSAGE.COACH_EMPTY_MESSAGE
-                : tabName === "staff"
-                ? MESSAGE.STAFF_EMPTY_MESSAGE
-                : tabName === "player"
-                ? MESSAGE.PLAYER_EMPTY_MESSAGE
-                : MESSAGE.FAN_EMPTY_MESSAGE}
-            </span>
-          )}
-          {renderModalPopup()}
-          {toggleModalOpen && (
-            <ClosingModal
-              image={toggleChecked ? IMAGES.smile_emoji : IMAGES.sad_emoji}
-              popTitle="Confirm"
-              popContent={
-                toggleItem?.team_name === "" && toggleItem?.status
-                  ? "User has not signed up, hence cannot be deactivated."
-                  : `Are you sure you want to ${
-                      toggleChecked ? "activate" : "deactivate"
-                    }`
-              }
-              popBoldContent={
-                toggleItem?.first_name && toggleItem?.last_name
-                  ? `${toggleItem?.first_name} ${toggleItem?.last_name}`
-                  : ""
-              }
-              buttonText="Confirm"
-              disabled={
-                toggleItem?.team_name === "" && toggleItem?.status
-                  ? true
-                  : false
-              }
-              cancelButtonOnClick={() => {
-                setToggleModalOpen(false);
-              }}
-              buttonOnClick={async () => {
-                setToggleModalOpen(false);
-                setModalOpen(false);
-                let updateStatusReq = {
-                  userId: toggleItem?._id,
-                  status: toggleChecked ? "ACTIVE" : "INACTIVE",
-                };
-                if (tabName === "coach") {
-                  const res = await updateCoachStatus(updateStatusReq).unwrap();
-                  if (res?.code === 0) {
-                    Utility.toastMessage("Coach status updated successfully");
-                  }
-                } else if (tabName === "staff") {
-                  const res = await updateStaffStatus(updateStatusReq).unwrap();
-                  if (res?.code === 0) {
-                    Utility.toastMessage("Staff status updated successfully");
-                  }
-                } else if (tabName === "player") {
-                  const res = await updatePlayerStatus(
-                    updateStatusReq
-                  ).unwrap();
-                  if (res?.code === 0) {
-                    Utility.toastMessage("Player status updated successfully");
-                  }
-                } else {
-                  const res = await updateFanStatus(updateStatusReq).unwrap();
-                  if (res?.code === 0) {
-                    Utility.toastMessage("Fan status updated successfully");
-                  }
+            {renderModalPopup()}
+            {toggleModalOpen && (
+              <ClosingModal
+                image={toggleChecked ? IMAGES.smile_emoji : IMAGES.sad_emoji}
+                popTitle="Confirm"
+                popContent={
+                  toggleItem?.team_name === "" && toggleItem?.status
+                    ? "User has not signed up, hence cannot be deactivated."
+                    : `Are you sure you want to ${
+                        toggleChecked ? "activate" : "deactivate"
+                      }`
                 }
-              }}
-            />
-          )}
-          {!dataFetching && datas !== undefined && datas?.length > 10 && (
-            <div className="grid grid-cols-2">
-              <div />
-              <div className="ml-auto">
-                <Pagination
-                  currentPage={currentPage}
-                  totalPages={Math.ceil(datas?.length / itemsPerPage)}
-                  onPageChange={handlePageChange}
-                />
+                popBoldContent={
+                  toggleItem?.first_name && toggleItem?.last_name
+                    ? `${toggleItem?.first_name} ${toggleItem?.last_name}`
+                    : ""
+                }
+                buttonText="Confirm"
+                disabled={
+                  toggleItem?.team_name === "" && toggleItem?.status
+                    ? true
+                    : false
+                }
+                cancelButtonOnClick={() => {
+                  setToggleModalOpen(false);
+                }}
+                buttonOnClick={async () => {
+                  setToggleModalOpen(false);
+                  setModalOpen(false);
+                  let updateStatusReq = {
+                    userId: toggleItem?._id,
+                    status: toggleChecked ? "ACTIVE" : "INACTIVE",
+                  };
+                  if (tabName === "coach") {
+                    const res = await updateCoachStatus(
+                      updateStatusReq
+                    ).unwrap();
+                    if (res?.code === 0) {
+                      Utility.toastMessage("Coach status updated successfully");
+                    }
+                  } else if (tabName === "staff") {
+                    const res = await updateStaffStatus(
+                      updateStatusReq
+                    ).unwrap();
+                    if (res?.code === 0) {
+                      Utility.toastMessage("Staff status updated successfully");
+                    }
+                  } else if (tabName === "player") {
+                    const res = await updatePlayerStatus(
+                      updateStatusReq
+                    ).unwrap();
+                    if (res?.code === 0) {
+                      Utility.toastMessage(
+                        "Player status updated successfully"
+                      );
+                    }
+                  } else {
+                    const res = await updateFanStatus(updateStatusReq).unwrap();
+                    if (res?.code === 0) {
+                      Utility.toastMessage("Fan status updated successfully");
+                    }
+                  }
+                }}
+              />
+            )}
+            {!dataFetching && datas !== undefined && datas?.length > 10 && (
+              <div className="grid grid-cols-2">
+                <div />
+                <div className="ml-auto">
+                  <Pagination
+                    currentPage={currentPage}
+                    totalPages={Math.ceil(datas?.length / itemsPerPage)}
+                    onPageChange={handlePageChange}
+                  />
+                </div>
               </div>
-            </div>
-          )}
+            )}
+          </div>
         </div>
       </div>
-    </div>
+    </Animation>
   );
 };
 
